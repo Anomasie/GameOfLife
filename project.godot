@@ -1,0 +1,27 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Spiel-des-Lebens"
+run/main_scene="res://nodes/GAME.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+config/icon="res://assets/textures/Icon-GameOfLife.png"
+
+[gui]
+
+theme/custom="res://assets/MainTheme.tres"
+theme/custom_font="res://assets/dogicapixel-new.ttf"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

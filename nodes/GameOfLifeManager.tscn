@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://cv42pn06iy23t"]
+
+[ext_resource type="Shader" path="res://shader/GameOfLife.gdshader" id="1_khhur"]
+[ext_resource type="Texture2D" uid="uid://c61731klbbmg5" path="res://Schmetterling.JPG" id="2_uygnl"]
+
+[sub_resource type="Gradient" id="Gradient_1fyrd"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pag1t"]
+gradient = SubResource("Gradient_1fyrd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5nu1r"]
+shader = ExtResource("1_khhur")
+
+[sub_resource type="Gradient" id="Gradient_mq3vq"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_egwpq"]
+gradient = SubResource("Gradient_mq3vq")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Texture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_uygnl")
+expand_mode = 1
+
+[node name="WhiteSpot" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -20.0
+offset_right = 128.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_pag1t")
+
+[node name="GameOfLife" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_5nu1r")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_egwpq")
