@@ -1,13 +1,15 @@
 extends Control
 
-@onready var GameOfLife = $Margin/GameOfLife
+@onready var GameField = $Margin/GameField
 
 # buttons
 @onready var PlayButton = $Screen/Container/MarginContainer/GridContainer/PlayButton
 
 func _on_play_button_pressed() -> void:
-	GameOfLife.set_pause(PlayButton.on)
-
+	GameField.set_pause(PlayButton.on)
 
 func _on_delete_button_pressed() -> void:
-	GameOfLife.delete_all()
+	GameField.delete_all()
+
+func _on_random_button_pressed() -> void:
+	GameField.load_map(GameOfLife.random_map())
