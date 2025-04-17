@@ -1,7 +1,7 @@
 extends Node
 class_name GameOfLife
 
-const SIZE = Vector2i(50,32)
+const SIZE = Vector2i(100,50)
 
 const NORMAL_CELL = Vector2i(0,0)
 const BORDER_CELL = Vector2i(1,0)

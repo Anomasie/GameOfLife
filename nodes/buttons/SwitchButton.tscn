@@ -7,27 +7,27 @@
 atlas = ExtResource("2_sp5td")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0p2ki"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjvk6"]
 atlas = ExtResource("2_sp5td")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r4g51"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jik35"]
 atlas = ExtResource("2_sp5td")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wu6pr"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nljy1"]
 atlas = ExtResource("2_sp5td")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fo0b0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mh1v"]
 atlas = ExtResource("2_sp5td")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ln4ms"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lm7qi"]
 atlas = ExtResource("2_sp5td")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sai4k"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_su6in"]
 atlas = ExtResource("2_sp5td")
 region = Rect2(96, 0, 32, 32)
 
@@ -45,17 +45,17 @@ script = ExtResource("1_6g3si")
 [node name="On" type="TextureButton" parent="."]
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_8gx23")
-texture_pressed = SubResource("AtlasTexture_0p2ki")
-texture_hover = SubResource("AtlasTexture_r4g51")
-texture_disabled = SubResource("AtlasTexture_wu6pr")
+texture_pressed = SubResource("AtlasTexture_gjvk6")
+texture_hover = SubResource("AtlasTexture_jik35")
+texture_disabled = SubResource("AtlasTexture_nljy1")
 
 [node name="Off" type="TextureButton" parent="."]
 visible = false
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_8gx23")
-texture_pressed = SubResource("AtlasTexture_fo0b0")
-texture_hover = SubResource("AtlasTexture_ln4ms")
-texture_disabled = SubResource("AtlasTexture_sai4k")
+texture_pressed = SubResource("AtlasTexture_3mh1v")
+texture_hover = SubResource("AtlasTexture_lm7qi")
+texture_disabled = SubResource("AtlasTexture_su6in")
 
 [connection signal="pressed" from="On" to="." method="_on_on_pressed"]
 [connection signal="pressed" from="Off" to="." method="_on_off_pressed"]

@@ -58,6 +58,10 @@ func set_value(val) -> void:
 	Off.visible = val
 	on = val
 
+func set_disabled(val) -> void:
+	On.disabled = val
+	Off.disabled = val
+
 func _on_on_pressed() -> void:
 	on = true
 	pressed.emit()

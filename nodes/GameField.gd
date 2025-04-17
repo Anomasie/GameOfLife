@@ -37,11 +37,14 @@ func _process(_delta: float) -> void:
 
 ## time
 
-func set_pause(resume) -> void:
-	if resume:
+func set_pause(pause) -> void:
+	if not pause:
 		WorldTime.start()
 	else:
 		WorldTime.stop()
+
+func set_time(value) -> void:
+	WorldTime.wait_time = value
 
 ## deletion
 
