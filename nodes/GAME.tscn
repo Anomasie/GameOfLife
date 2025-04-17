@@ -53,6 +53,7 @@ theme_override_constants/margin_bottom = 64
 
 [node name="GameOfLife" parent="Margin" instance=ExtResource("1_unisr")]
 layout_mode = 2
+SIZE = Vector2i(100, 50)
 
 [node name="Screen" type="MarginContainer" parent="."]
 layout_mode = 1
