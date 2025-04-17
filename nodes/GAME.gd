@@ -22,7 +22,7 @@ func _on_delete_button_pressed() -> void:
 	GameField.delete_all()
 
 func _on_random_button_pressed() -> void:
-	GameField.load_map(GameOfLife.random_map())
+	GameField.load_map() # load random is standard
 
 # slider
 

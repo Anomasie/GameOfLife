@@ -15,19 +15,19 @@ region = Rect2(0, 32, 32, 32)
 atlas = ExtResource("3_65sse")
 region = Rect2(0, 64, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_k82lx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayaxr"]
 atlas = ExtResource("3_65sse")
 region = Rect2(0, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_64is7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1w2mc"]
 atlas = ExtResource("3_65sse")
 region = Rect2(64, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_io52u"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hfht"]
 atlas = ExtResource("3_65sse")
 region = Rect2(32, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cavlm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_verhy"]
 atlas = ExtResource("3_65sse")
 region = Rect2(96, 96, 32, 32)
 
@@ -35,19 +35,19 @@ region = Rect2(96, 96, 32, 32)
 atlas = ExtResource("3_65sse")
 region = Rect2(0, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8iujy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqtuo"]
 atlas = ExtResource("3_65sse")
 region = Rect2(0, 128, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qsjfe"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8aus"]
 atlas = ExtResource("3_65sse")
 region = Rect2(64, 128, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w00dn"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddhwx"]
 atlas = ExtResource("3_65sse")
 region = Rect2(32, 128, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0755h"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5uyl"]
 atlas = ExtResource("3_65sse")
 region = Rect2(96, 128, 32, 32)
 
@@ -127,18 +127,18 @@ tex_off = SubResource("AtlasTexture_1641d")
 
 [node name="DeleteButton" parent="Screen/Container/MarginContainer/GridContainer" instance=ExtResource("6_p75vb")]
 layout_mode = 2
-texture_normal = SubResource("AtlasTexture_k82lx")
-texture_pressed = SubResource("AtlasTexture_64is7")
-texture_hover = SubResource("AtlasTexture_io52u")
-texture_disabled = SubResource("AtlasTexture_cavlm")
+texture_normal = SubResource("AtlasTexture_ayaxr")
+texture_pressed = SubResource("AtlasTexture_1w2mc")
+texture_hover = SubResource("AtlasTexture_6hfht")
+texture_disabled = SubResource("AtlasTexture_verhy")
 tex = SubResource("AtlasTexture_k1f6f")
 
 [node name="RandomButton" parent="Screen/Container/MarginContainer/GridContainer" instance=ExtResource("6_p75vb")]
 layout_mode = 2
-texture_normal = SubResource("AtlasTexture_8iujy")
-texture_pressed = SubResource("AtlasTexture_qsjfe")
-texture_hover = SubResource("AtlasTexture_w00dn")
-texture_disabled = SubResource("AtlasTexture_0755h")
+texture_normal = SubResource("AtlasTexture_dqtuo")
+texture_pressed = SubResource("AtlasTexture_d8aus")
+texture_hover = SubResource("AtlasTexture_ddhwx")
+texture_disabled = SubResource("AtlasTexture_p5uyl")
 tex = SubResource("AtlasTexture_qn5mv")
 
 [connection signal="value_changed" from="Screen/Container/MarginContainer/GridContainer/TimeSlider" to="." method="_on_time_slider_value_changed"]
