@@ -10,13 +10,15 @@ signal please_change_color
 @onready var ColorTexture = $MarginContainer/Lines/GridContainer/ColorTexture
 
 func set_species(species) -> void:
+	if typeof(species) != TYPE_DICTIONARY:
+		species = species.to_dict()
 	Name.placeholder_text = species["name"]
 	Chance.value = species["chance"]
 	ColorTexture.self_modulate = species["color"]
 	SLedge.set_boxes(species["survival"]["sum"])
 	RLedge.set_boxes(species["reproduction"]["sum"])
 
-func get_species() -> Dictionary:
+func get_species() -> Species:
 	var dict = {}
 	dict["name"] = Name.placeholder_text
 	dict["chance"] = Chance.value
@@ -28,7 +30,7 @@ func get_species() -> Dictionary:
 	dict["survival"] = {}
 	dict["survival"]["sum"] = SLedge.read_boxes()
 	
-	return dict
+	return Species.from_dict(dict)
 
 func change_color(new_color) -> void:
 	ColorTexture.self_modulate = new_color

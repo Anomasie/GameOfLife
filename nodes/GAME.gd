@@ -1,21 +1,18 @@
 extends Control
 
+# game field
 @onready var GameField = $Screen/Lines/Sep/GameField
 
 # buttons
-
 @onready var PlayButton = $Screen/Lines/Time/Content/GridContainer/PlayButton
 
 # time
-
 const TIME_SLIDER_HALF_VALUE = 1
 @onready var TimeSlider = $Screen/Lines/Time/Content/GridContainer/TimeSlider
-
 const STANDARD_TIME = 0.1
 var last_time = STANDARD_TIME
 
 # rules
-
 @onready var Rules = $Screen/Lines/Sep/Rules
 @onready var ColorSliders = $Screen/ColorSliders
 
@@ -90,3 +87,9 @@ func _on_color_sliders_color_changed() -> void:
 	var color = ColorSliders.get_color()
 	GameField.change_current_color(color)
 	Rules.change_color(color)
+
+func _on_rules_species_added(new_species) -> void:
+	GameField.add_species(new_species)
+
+func _on_rules_species_deleted(index) -> void:
+	GameField.delete_species(index)

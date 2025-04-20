@@ -9,19 +9,19 @@
 [ext_resource type="PackedScene" uid="uid://c78j7mxkldpbi" path="res://nodes/Rules.tscn" id="7_uqs2r"]
 [ext_resource type="PackedScene" uid="uid://mtu0mxcjwc41" path="res://nodes/color-options/ColorSliders.tscn" id="8_uqrqp"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1j0iy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3erku"]
 atlas = ExtResource("3_65sse")
 region = Rect2(0, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tsby8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_33jrb"]
 atlas = ExtResource("3_65sse")
 region = Rect2(64, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ajcww"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ht4xo"]
 atlas = ExtResource("3_65sse")
 region = Rect2(32, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3pyop"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_yg85u"]
 atlas = ExtResource("3_65sse")
 region = Rect2(96, 96, 32, 32)
 
@@ -29,19 +29,19 @@ region = Rect2(96, 96, 32, 32)
 atlas = ExtResource("3_65sse")
 region = Rect2(0, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xj83v"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dctax"]
 atlas = ExtResource("3_65sse")
 region = Rect2(0, 128, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_21mqa"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3g48u"]
 atlas = ExtResource("3_65sse")
 region = Rect2(64, 128, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hwgmf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhn36"]
 atlas = ExtResource("3_65sse")
 region = Rect2(32, 128, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ps28q"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0v0l"]
 atlas = ExtResource("3_65sse")
 region = Rect2(96, 128, 32, 32)
 
@@ -113,18 +113,18 @@ mouse_filter = 2
 
 [node name="DeleteButton" parent="Screen/Lines/Sep/Buttons/Content/GridContainer" instance=ExtResource("6_p75vb")]
 layout_mode = 2
-texture_normal = SubResource("AtlasTexture_1j0iy")
-texture_pressed = SubResource("AtlasTexture_tsby8")
-texture_hover = SubResource("AtlasTexture_ajcww")
-texture_disabled = SubResource("AtlasTexture_3pyop")
+texture_normal = SubResource("AtlasTexture_3erku")
+texture_pressed = SubResource("AtlasTexture_33jrb")
+texture_hover = SubResource("AtlasTexture_ht4xo")
+texture_disabled = SubResource("AtlasTexture_yg85u")
 tex = SubResource("AtlasTexture_k1f6f")
 
 [node name="RandomButton" parent="Screen/Lines/Sep/Buttons/Content/GridContainer" instance=ExtResource("6_p75vb")]
 layout_mode = 2
-texture_normal = SubResource("AtlasTexture_xj83v")
-texture_pressed = SubResource("AtlasTexture_21mqa")
-texture_hover = SubResource("AtlasTexture_hwgmf")
-texture_disabled = SubResource("AtlasTexture_ps28q")
+texture_normal = SubResource("AtlasTexture_dctax")
+texture_pressed = SubResource("AtlasTexture_3g48u")
+texture_hover = SubResource("AtlasTexture_mhn36")
+texture_disabled = SubResource("AtlasTexture_d0v0l")
 tex = SubResource("AtlasTexture_qn5mv")
 
 [node name="GameField" parent="Screen/Lines/Sep" instance=ExtResource("1_unisr")]
@@ -170,7 +170,6 @@ tex_on = SubResource("AtlasTexture_cvfim")
 tex_off = SubResource("AtlasTexture_1641d")
 
 [node name="ColorSliders" parent="Screen" instance=ExtResource("8_uqrqp")]
-visible = false
 layout_mode = 2
 size_flags_vertical = 8
 
@@ -183,6 +182,8 @@ one_shot = true
 [connection signal="changed_size" from="Screen/Lines/Sep/Rules" to="." method="_on_rules_changed_size"]
 [connection signal="game_changed" from="Screen/Lines/Sep/Rules" to="." method="_on_rules_game_changed"]
 [connection signal="please_change_color" from="Screen/Lines/Sep/Rules" to="." method="_on_rules_please_change_color"]
+[connection signal="species_added" from="Screen/Lines/Sep/Rules" to="." method="_on_rules_species_added"]
+[connection signal="species_deleted" from="Screen/Lines/Sep/Rules" to="." method="_on_rules_species_deleted"]
 [connection signal="value_changed" from="Screen/Lines/Time/Content/GridContainer/TimeSlider" to="." method="_on_time_slider_value_changed"]
 [connection signal="pressed" from="Screen/Lines/Time/Content/GridContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="color_changed" from="Screen/ColorSliders" to="." method="_on_color_sliders_color_changed"]

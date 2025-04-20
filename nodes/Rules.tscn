@@ -1,13 +1,57 @@
-[gd_scene load_steps=4 format=3 uid="uid://c78j7mxkldpbi"]
+[gd_scene load_steps=17 format=3 uid="uid://c78j7mxkldpbi"]
 
 [ext_resource type="Script" path="res://nodes/Rules.gd" id="1_1cuho"]
 [ext_resource type="Texture2D" uid="uid://ci0wgmt623rqk" path="res://assets/textures/Panels.png" id="1_2uerk"]
 [ext_resource type="PackedScene" uid="uid://b2mxk45drj2c0" path="res://nodes/Species.tscn" id="2_3pv0o"]
+[ext_resource type="PackedScene" uid="uid://b0xgehr30hs6k" path="res://nodes/buttons/MyTextureButton.tscn" id="4_y55nq"]
+[ext_resource type="Texture2D" uid="uid://bgkxnq1p0b2kd" path="res://assets/textures/Buttons.png" id="5_nssgp"]
+[ext_resource type="PackedScene" uid="uid://2is183cj7wat" path="res://nodes/buttons/SpeciesButton.tscn" id="6_4dwvm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uebtk"]
+atlas = ExtResource("5_nssgp")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_od16v"]
+atlas = ExtResource("5_nssgp")
+region = Rect2(64, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnu5c"]
+atlas = ExtResource("5_nssgp")
+region = Rect2(32, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7oi7u"]
+atlas = ExtResource("5_nssgp")
+region = Rect2(96, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fufe3"]
+atlas = ExtResource("5_nssgp")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2alu"]
+atlas = ExtResource("5_nssgp")
+region = Rect2(0, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12f53"]
+atlas = ExtResource("5_nssgp")
+region = Rect2(64, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhlqo"]
+atlas = ExtResource("5_nssgp")
+region = Rect2(32, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3l6pn"]
+atlas = ExtResource("5_nssgp")
+region = Rect2(96, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_476xq"]
+atlas = ExtResource("5_nssgp")
+region = Rect2(0, 224, 32, 32)
 
 [node name="Rules" type="MarginContainer"]
 size_flags_horizontal = 8
 size_flags_vertical = 4
 script = ExtResource("1_1cuho")
+SpeciesButtonScene = ExtResource("6_4dwvm")
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 2
@@ -44,10 +88,36 @@ text = "x"
 layout_mode = 2
 allow_greater = true
 
-[node name="Species" parent="Margin/Lines" instance=ExtResource("2_3pv0o")]
+[node name="SpeciesEditor" parent="Margin/Lines" instance=ExtResource("2_3pv0o")]
 layout_mode = 2
+
+[node name="SpeciesList" type="HBoxContainer" parent="Margin/Lines"]
+layout_mode = 2
+
+[node name="AddButton" parent="Margin/Lines/SpeciesList" instance=ExtResource("4_y55nq")]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_uebtk")
+texture_pressed = SubResource("AtlasTexture_od16v")
+texture_hover = SubResource("AtlasTexture_cnu5c")
+texture_disabled = SubResource("AtlasTexture_7oi7u")
+tex = SubResource("AtlasTexture_fufe3")
+
+[node name="SpeciesButtons" type="HBoxContainer" parent="Margin/Lines/SpeciesList"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="DeleteButton" parent="Margin/Lines/SpeciesList" instance=ExtResource("4_y55nq")]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_g2alu")
+texture_pressed = SubResource("AtlasTexture_12f53")
+texture_hover = SubResource("AtlasTexture_lhlqo")
+texture_disabled = SubResource("AtlasTexture_3l6pn")
+tex = SubResource("AtlasTexture_476xq")
 
 [connection signal="value_changed" from="Margin/Lines/Sep/LineEditX" to="." method="_on_line_edit_x_value_changed"]
 [connection signal="value_changed" from="Margin/Lines/Sep/LineEditY" to="." method="_on_line_edit_y_value_changed"]
-[connection signal="please_change_color" from="Margin/Lines/Species" to="." method="_on_species_please_change_color"]
-[connection signal="species_changed" from="Margin/Lines/Species" to="." method="_on_species_species_changed"]
+[connection signal="please_change_color" from="Margin/Lines/SpeciesEditor" to="." method="_on_species_please_change_color"]
+[connection signal="species_changed" from="Margin/Lines/SpeciesEditor" to="." method="_on_species_species_changed"]
+[connection signal="pressed" from="Margin/Lines/SpeciesList/AddButton" to="." method="_on_add_button_pressed"]
+[connection signal="pressed" from="Margin/Lines/SpeciesList/DeleteButton" to="." method="_on_delete_button_pressed"]

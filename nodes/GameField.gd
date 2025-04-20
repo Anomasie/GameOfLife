@@ -102,7 +102,7 @@ func load_new_maps(map=game.random_map()) -> void:
 			Maps.pop_back()
 	# set interior
 	for i in len(Maps):
-		Maps[i].self_modulate = game.SPECIES[i]["color"]
+		Maps[i].self_modulate = game.SPECIES[i].color
 	game.map = map
 	set_map()
 
@@ -150,6 +150,18 @@ func print_matrix(mat=game.map) -> void:
 
 func change_current_color(new_color):
 	Maps[current_species].self_modulate = new_color
+
+## species amount
+
+func add_species(new_species):
+	var new_game = game
+	new_game.SPECIES.append(new_species)
+	self.set_game(new_game)
+
+func delete_species(index):
+	var new_game = game
+	new_game.SPECIES.remove_at(index)
+	self.set_game(new_game)
 
 # background button & marking cells
 

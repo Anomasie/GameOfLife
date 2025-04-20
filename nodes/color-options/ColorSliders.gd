@@ -49,7 +49,6 @@ func _ready():
 			UserPresets[i].pressed.connect(_on_user_preset_pressed.bind(i))
 	# open something
 	open(Color.WHITE)
-	hide()
 
 # open and close
 

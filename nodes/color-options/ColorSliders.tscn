@@ -120,7 +120,6 @@ atlas = ExtResource("3_lrqyw")
 region = Rect2(0, 160, 32, 32)
 
 [node name="ColorSliders" type="MarginContainer"]
-visible = false
 offset_right = 422.0
 offset_bottom = 120.0
 mouse_filter = 2

@@ -18,69 +18,11 @@ const NEIGHBORS = [
 
 var SPECIES = []
 
-const std_species = [
-	{
-		"name": "Conway",
-		"color": Color.WHITE,
-		"chance": 0.16,
-		"reproduction": {
-			"sum": [3],
-		},
-		"survival": {
-			"sum": [2,3]
-		}
-	}
-]
-
-const old_species = [
-	{
-		"name": "plants",
-		"color": Color.GREEN,
-		"chance": 0.1,
-		"reproduction": {
-			"plancton": [0,1],
-			"plants": [1,2]
-		},
-		"survival": {
-			"plancton": [0,1],
-			"plants": [0,1,2,3,4,5,6]
-		}
-	},
-	{
-		"name": "plancton",
-		"color": Color.BLUE,
-		"chance": 0.13,
-		"reproduction": {
-			"plants": [3,4,5,6,7,8],
-			"plancton": [1,2,3],
-			"predator": [0,1]
-		},
-		"survival": {
-			"predator": [0,1,2,3],
-			"plants": [1,2,3,4,5,6,7,8],
-			"plancton": [1,2,3,4]
-		}
-	},
-	{
-		"name": "predator",
-		"color": Color.RED,
-		"chance": 0.1,
-		"reproduction": {
-			"predator": [1,2],
-			"plancton": [1,2,3,4,5,6,7,8]
-		},
-		"survival": {
-			"plancton": [1,2,3,4,5,6,7,8],
-			"predator": [0,1,2]
-		}
-	}
-]
-
 var KEY_DICT = {}
 
 var map = random_map()
 
-func _init(size=Vector2i(80,50), species=std_species):
+func _init(size=Vector2i(40,25), species=[Species.new()]):
 	SIZE = size
 	SPECIES = species
 	map = empty_map()
@@ -89,7 +31,7 @@ func _init(size=Vector2i(80,50), species=std_species):
 
 func set_key_dict():
 	for i in len(SPECIES):
-		KEY_DICT[SPECIES[i]["name"]] = i
+		KEY_DICT[SPECIES[i].my_name] = i
 
 func empty_map() -> Array:
 	var array = []
@@ -108,15 +50,12 @@ func random_map() -> Array:
 		array.fill(EMPTY)
 		for y in SIZE.y:
 			for i in len(SPECIES):
-				if randf() <= SPECIES[i]["chance"]:
+				if randf() <= SPECIES[i].chance:
 					array[y] = i
 		result.append(array)
 	return result
 
 func fulfills(requirements, x,y):
-	# species cannot survive
-	if not SPECIES[map[x][y]].has("survival"):
-		return false
 	# not sum requirements
 	var all_sums = 0
 	for i in len(SPECIES):
@@ -134,7 +73,7 @@ func fulfills(requirements, x,y):
 				b = 0
 			sum += int(map[a][b] == i)
 		## check conditions
-		if requirements.has(SPECIES[i]["name"]) and sum not in requirements[SPECIES[i]["name"]]:
+		if requirements.has(SPECIES[i].my_name) and sum not in requirements[SPECIES[i].my_name]:
 			return false
 		else:
 			all_sums += sum
@@ -154,13 +93,13 @@ func get_next_step() -> Array:
 		for y in range(SIZE.y):
 			# check if species survives
 			if array[y] != EMPTY:
-				if not SPECIES[map[x][y]].has("survival") or not fulfills(SPECIES[map[x][y]]["survival"], x,y):
+				if not fulfills(SPECIES[map[x][y]].survival, x,y):
 					array[y] = EMPTY
 			# if empty: check if specise spreads to there
 			if array[y] == EMPTY:
 				for i in len(SPECIES):
 					if array[y] == EMPTY:
-						if SPECIES[i].has("reproduction") and fulfills(SPECIES[i]["reproduction"], x,y):
+						if fulfills(SPECIES[i].reproduction, x,y):
 							array[y] = i
 		new_map[x] = array
 	return new_map
