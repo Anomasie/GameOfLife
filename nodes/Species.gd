@@ -41,6 +41,5 @@ func _on_name_edit_text_submitted(new_text: String) -> void:
 	Name.text = ""
 	species_changed.emit(get_species())
 
-
 func _on_color_button_pressed() -> void:
 	please_change_color.emit()

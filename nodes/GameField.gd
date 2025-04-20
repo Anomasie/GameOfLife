@@ -61,9 +61,14 @@ func set_game_size(new_size):
 	resize()
 
 func set_game(new_game):
-	game = new_game
-	load_new_maps(new_game.random_map())
-	self.resize()
+	if new_game.SIZE != game.SIZE:
+		game = new_game
+		load_new_maps(game.random_map())
+		self.resize()
+	else:
+		new_game.map = game.map
+		game = new_game
+		load_new_maps(game.map)
 
 # actions from GAME
 
@@ -98,7 +103,7 @@ func load_new_maps(map=game.random_map()) -> void:
 	# set interior
 	for i in len(Maps):
 		Maps[i].self_modulate = game.SPECIES[i]["color"]
-	game.map = game.random_map()
+	game.map = map
 	set_map()
 
 func load_random_map() -> void:

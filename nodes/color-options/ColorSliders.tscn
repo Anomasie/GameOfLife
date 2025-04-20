@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://mtu0mxcjwc41"]
+[gd_scene load_steps=37 format=3 uid="uid://mtu0mxcjwc41"]
 
 [ext_resource type="Script" path="res://nodes/color-options/ColorSliders.gd" id="1_3wpbl"]
 [ext_resource type="PackedScene" uid="uid://b0xgehr30hs6k" path="res://nodes/buttons/MyTextureButton.tscn" id="2_mfwfu"]
@@ -59,19 +59,68 @@ gradient = SubResource("Gradient_15o5r")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_721e2"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljtry"]
+atlas = ExtResource("3_lrqyw")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q758v"]
+atlas = ExtResource("3_lrqyw")
+region = Rect2(64, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_66a36"]
+atlas = ExtResource("3_lrqyw")
+region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2h1qw"]
+atlas = ExtResource("3_lrqyw")
+region = Rect2(96, 128, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgql7"]
 atlas = ExtResource("3_lrqyw")
 region = Rect2(0, 128, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5m77"]
+atlas = ExtResource("3_lrqyw")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqop5"]
+atlas = ExtResource("3_lrqyw")
+region = Rect2(64, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qf8t6"]
+atlas = ExtResource("3_lrqyw")
+region = Rect2(32, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wykco"]
+atlas = ExtResource("3_lrqyw")
+region = Rect2(96, 192, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_esgow"]
 atlas = ExtResource("3_lrqyw")
 region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s535q"]
+atlas = ExtResource("3_lrqyw")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnqu1"]
+atlas = ExtResource("3_lrqyw")
+region = Rect2(64, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n024h"]
+atlas = ExtResource("3_lrqyw")
+region = Rect2(32, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1k224"]
+atlas = ExtResource("3_lrqyw")
+region = Rect2(96, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v64de"]
 atlas = ExtResource("3_lrqyw")
 region = Rect2(0, 160, 32, 32)
 
 [node name="ColorSliders" type="MarginContainer"]
+visible = false
 offset_right = 422.0
 offset_bottom = 120.0
 mouse_filter = 2
@@ -275,6 +324,10 @@ layout_mode = 2
 
 [node name="RandomButton" parent="Dialogue/Content/Lines/Columns/Buttons" instance=ExtResource("2_mfwfu")]
 layout_mode = 2
+texture_normal = SubResource("AtlasTexture_ljtry")
+texture_pressed = SubResource("AtlasTexture_q758v")
+texture_hover = SubResource("AtlasTexture_66a36")
+texture_disabled = SubResource("AtlasTexture_2h1qw")
 tex = SubResource("AtlasTexture_vgql7")
 
 [node name="LastLine" type="HBoxContainer" parent="Dialogue/Content/Lines"]
@@ -282,6 +335,10 @@ layout_mode = 2
 
 [node name="AddButton" parent="Dialogue/Content/Lines/LastLine" instance=ExtResource("2_mfwfu")]
 layout_mode = 2
+texture_normal = SubResource("AtlasTexture_s5m77")
+texture_pressed = SubResource("AtlasTexture_aqop5")
+texture_hover = SubResource("AtlasTexture_qf8t6")
+texture_disabled = SubResource("AtlasTexture_wykco")
 tex = SubResource("AtlasTexture_esgow")
 
 [node name="UserPresets" type="HBoxContainer" parent="Dialogue/Content/Lines/LastLine"]
@@ -379,6 +436,10 @@ stretch_mode = 0
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+texture_normal = SubResource("AtlasTexture_s535q")
+texture_pressed = SubResource("AtlasTexture_cnqu1")
+texture_hover = SubResource("AtlasTexture_n024h")
+texture_disabled = SubResource("AtlasTexture_1k224")
 tex = SubResource("AtlasTexture_v64de")
 
 [connection signal="drag_ended" from="Dialogue/Content/Lines/Columns/Sliders/Value/Slider" to="." method="_on_slider_drag_ended"]

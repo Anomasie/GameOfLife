@@ -31,7 +31,6 @@ func _on_line_edit_y_value_changed(value: int) -> void:
 	if disabled == 0:
 		changed_size.emit(Vector2i(EditX.value, value))
 
-
 func _on_species_species_changed(new_species) -> void:
 	if disabled == 0:
 		var new_game = GameOfLife.new(

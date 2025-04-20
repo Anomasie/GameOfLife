@@ -84,6 +84,7 @@ func _on_rules_game_changed(new_game) -> void:
 func _on_rules_please_change_color() -> void:
 	ColorSliders.open(GameField.game.SPECIES[GameField.current_species]["color"])
 
+# color sliders
 
 func _on_color_sliders_color_changed() -> void:
 	var color = ColorSliders.get_color()
