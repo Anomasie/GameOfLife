@@ -49,4 +49,5 @@ layout_mode = 2
 
 [connection signal="value_changed" from="Margin/Lines/Sep/LineEditX" to="." method="_on_line_edit_x_value_changed"]
 [connection signal="value_changed" from="Margin/Lines/Sep/LineEditY" to="." method="_on_line_edit_y_value_changed"]
+[connection signal="please_change_color" from="Margin/Lines/Species" to="." method="_on_species_please_change_color"]
 [connection signal="species_changed" from="Margin/Lines/Species" to="." method="_on_species_species_changed"]

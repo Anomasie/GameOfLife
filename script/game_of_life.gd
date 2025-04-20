@@ -21,7 +21,7 @@ var SPECIES = []
 const std_species = [
 	{
 		"name": "Conway",
-		"atlas": Vector2i(0,0),
+		"color": Color.WHITE,
 		"chance": 0.16,
 		"reproduction": {
 			"sum": [3],
@@ -35,7 +35,7 @@ const std_species = [
 const old_species = [
 	{
 		"name": "plants",
-		"atlas": Vector2i(1,1),
+		"color": Color.GREEN,
 		"chance": 0.1,
 		"reproduction": {
 			"plancton": [0,1],
@@ -48,7 +48,7 @@ const old_species = [
 	},
 	{
 		"name": "plancton",
-		"atlas": Vector2i(0,0),
+		"color": Color.BLUE,
 		"chance": 0.13,
 		"reproduction": {
 			"plants": [3,4,5,6,7,8],
@@ -63,7 +63,7 @@ const old_species = [
 	},
 	{
 		"name": "predator",
-		"atlas": Vector2i(0,1),
+		"color": Color.RED,
 		"chance": 0.1,
 		"reproduction": {
 			"predator": [1,2],

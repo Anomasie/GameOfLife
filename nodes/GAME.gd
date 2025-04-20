@@ -17,6 +17,7 @@ var last_time = STANDARD_TIME
 # rules
 
 @onready var Rules = $Screen/Lines/Sep/Rules
+@onready var ColorSliders = $Screen/ColorSliders
 
 # ready
 
@@ -24,7 +25,9 @@ func _ready() -> void:
 	Rules.set_rules(GameField.game)
 	TimeSlider.value = slider_descaled(STANDARD_TIME)
 	# connect
-	get_tree().get_root().size_changed.connect(resize) 
+	get_tree().get_root().size_changed.connect(resize)
+	# hide & show
+	ColorSliders.hide()
 
 func resize():
 	$ResizeTimer.start()
@@ -40,7 +43,7 @@ func _on_delete_button_pressed() -> void:
 	GameField.delete_all()
 
 func _on_random_button_pressed() -> void:
-	GameField.load_map() # load random is standard
+	GameField.load_random_map() # load random is standard
 
 # slider
 
@@ -77,3 +80,12 @@ func _on_rules_changed_size(new_size) -> void:
 
 func _on_rules_game_changed(new_game) -> void:
 	GameField.set_game(new_game)
+
+func _on_rules_please_change_color() -> void:
+	ColorSliders.open(GameField.game.SPECIES[GameField.current_species]["color"])
+
+
+func _on_color_sliders_color_changed() -> void:
+	var color = ColorSliders.get_color()
+	GameField.change_current_color(color)
+	Rules.change_color(color)

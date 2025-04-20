@@ -2,6 +2,7 @@ extends MarginContainer
 
 signal changed_size
 signal game_changed
+signal please_change_color
 
 @onready var EditX = $Margin/Lines/Sep/LineEditX
 @onready var EditY = $Margin/Lines/Sep/LineEditY
@@ -16,6 +17,9 @@ func set_rules(new_game) -> void:
 	EditY.value = new_game.SIZE.y
 	Species.set_species(new_game.SPECIES[0])
 	disabled -= 1
+
+func change_color(new_color) -> void:
+	Species.change_color(new_color)
 
 # signals
 
@@ -35,3 +39,6 @@ func _on_species_species_changed(new_species) -> void:
 			[new_species]
 		)
 		game_changed.emit(new_game)
+
+func _on_species_please_change_color() -> void:
+	please_change_color.emit()
