@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cr5qf5i6qewm8"]
+[gd_scene load_steps=20 format=3 uid="uid://cr5qf5i6qewm8"]
 
 [ext_resource type="Script" path="res://nodes/GAME.gd" id="1_4b1f3"]
 [ext_resource type="PackedScene" uid="uid://jwbatjrd1wl2" path="res://nodes/GameField.tscn" id="1_unisr"]
@@ -6,6 +6,47 @@
 [ext_resource type="Texture2D" uid="uid://bgkxnq1p0b2kd" path="res://assets/textures/Buttons.png" id="3_65sse"]
 [ext_resource type="PackedScene" uid="uid://duebklrl317w2" path="res://nodes/buttons/SwitchButton.tscn" id="3_h0war"]
 [ext_resource type="PackedScene" uid="uid://b0xgehr30hs6k" path="res://nodes/buttons/MyTextureButton.tscn" id="6_p75vb"]
+[ext_resource type="PackedScene" uid="uid://c78j7mxkldpbi" path="res://nodes/Rules.tscn" id="7_uqs2r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hh8ju"]
+atlas = ExtResource("3_65sse")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wi2fk"]
+atlas = ExtResource("3_65sse")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32kgm"]
+atlas = ExtResource("3_65sse")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1rq1"]
+atlas = ExtResource("3_65sse")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1f6f"]
+atlas = ExtResource("3_65sse")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uy8a1"]
+atlas = ExtResource("3_65sse")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1olt"]
+atlas = ExtResource("3_65sse")
+region = Rect2(64, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxo1h"]
+atlas = ExtResource("3_65sse")
+region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ife4u"]
+atlas = ExtResource("3_65sse")
+region = Rect2(96, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qn5mv"]
+atlas = ExtResource("3_65sse")
+region = Rect2(0, 128, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvfim"]
 atlas = ExtResource("3_65sse")
@@ -14,46 +55,6 @@ region = Rect2(0, 32, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_1641d"]
 atlas = ExtResource("3_65sse")
 region = Rect2(0, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ayaxr"]
-atlas = ExtResource("3_65sse")
-region = Rect2(0, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1w2mc"]
-atlas = ExtResource("3_65sse")
-region = Rect2(64, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6hfht"]
-atlas = ExtResource("3_65sse")
-region = Rect2(32, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_verhy"]
-atlas = ExtResource("3_65sse")
-region = Rect2(96, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k1f6f"]
-atlas = ExtResource("3_65sse")
-region = Rect2(0, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dqtuo"]
-atlas = ExtResource("3_65sse")
-region = Rect2(0, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d8aus"]
-atlas = ExtResource("3_65sse")
-region = Rect2(64, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ddhwx"]
-atlas = ExtResource("3_65sse")
-region = Rect2(32, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p5uyl"]
-atlas = ExtResource("3_65sse")
-region = Rect2(96, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qn5mv"]
-atlas = ExtResource("3_65sse")
-region = Rect2(0, 128, 32, 32)
 
 [node name="GAME" type="Control"]
 layout_mode = 3
@@ -64,21 +65,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4b1f3")
 
-[node name="Margin" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 64
-theme_override_constants/margin_top = 64
-theme_override_constants/margin_right = 64
-theme_override_constants/margin_bottom = 64
-
-[node name="GameField" parent="Margin" instance=ExtResource("1_unisr")]
-layout_mode = 2
-
 [node name="Screen" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -88,13 +74,26 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Container" type="MarginContainer" parent="Screen"]
+[node name="Lines" type="VBoxContainer" parent="Screen"]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
+
+[node name="Title" type="Label" parent="Screen/Lines"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Conway's Game of Life"
+
+[node name="Sep" type="HBoxContainer" parent="Screen/Lines"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Buttons" type="MarginContainer" parent="Screen/Lines/Sep"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="Background" type="NinePatchRect" parent="Screen/Container"]
+[node name="Background" type="NinePatchRect" parent="Screen/Lines/Sep/Buttons"]
 layout_mode = 2
 texture = ExtResource("2_1gq0y")
 region_rect = Rect2(0, 0, 16, 16)
@@ -103,45 +102,79 @@ patch_margin_top = 4
 patch_margin_right = 12
 patch_margin_bottom = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="Screen/Container"]
+[node name="Content" type="MarginContainer" parent="Screen/Lines/Sep/Buttons"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="GridContainer" type="GridContainer" parent="Screen/Container/MarginContainer"]
+[node name="GridContainer" type="VBoxContainer" parent="Screen/Lines/Sep/Buttons/Content"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="Screen/Container/MarginContainer/GridContainer"]
+[node name="DeleteButton" parent="Screen/Lines/Sep/Buttons/Content/GridContainer" instance=ExtResource("6_p75vb")]
 layout_mode = 2
-text = "Geschwindigkeit"
+texture_normal = SubResource("AtlasTexture_hh8ju")
+texture_pressed = SubResource("AtlasTexture_wi2fk")
+texture_hover = SubResource("AtlasTexture_32kgm")
+texture_disabled = SubResource("AtlasTexture_c1rq1")
+tex = SubResource("AtlasTexture_k1f6f")
 
-[node name="TimeSlider" type="HSlider" parent="Screen/Container/MarginContainer/GridContainer"]
+[node name="RandomButton" parent="Screen/Lines/Sep/Buttons/Content/GridContainer" instance=ExtResource("6_p75vb")]
 layout_mode = 2
+texture_normal = SubResource("AtlasTexture_uy8a1")
+texture_pressed = SubResource("AtlasTexture_f1olt")
+texture_hover = SubResource("AtlasTexture_rxo1h")
+texture_disabled = SubResource("AtlasTexture_ife4u")
+tex = SubResource("AtlasTexture_qn5mv")
+
+[node name="GameField" parent="Screen/Lines/Sep" instance=ExtResource("1_unisr")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Rules" parent="Screen/Lines/Sep" instance=ExtResource("7_uqs2r")]
+layout_mode = 2
+
+[node name="Time" type="MarginContainer" parent="Screen/Lines"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Background" type="NinePatchRect" parent="Screen/Lines/Time"]
+layout_mode = 2
+texture = ExtResource("2_1gq0y")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 12
+patch_margin_top = 4
+patch_margin_right = 12
+patch_margin_bottom = 4
+
+[node name="Content" type="MarginContainer" parent="Screen/Lines/Time"]
+layout_mode = 2
+
+[node name="GridContainer" type="HBoxContainer" parent="Screen/Lines/Time/Content"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Screen/Lines/Time/Content/GridContainer"]
+layout_mode = 2
+text = "generation duration"
+
+[node name="TimeSlider" type="HSlider" parent="Screen/Lines/Time/Content/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
 value = 50.0
 
-[node name="PlayButton" parent="Screen/Container/MarginContainer/GridContainer" instance=ExtResource("3_h0war")]
+[node name="PlayButton" parent="Screen/Lines/Time/Content/GridContainer" instance=ExtResource("3_h0war")]
 layout_mode = 2
 on = true
 tex_on = SubResource("AtlasTexture_cvfim")
 tex_off = SubResource("AtlasTexture_1641d")
 
-[node name="DeleteButton" parent="Screen/Container/MarginContainer/GridContainer" instance=ExtResource("6_p75vb")]
-layout_mode = 2
-texture_normal = SubResource("AtlasTexture_ayaxr")
-texture_pressed = SubResource("AtlasTexture_1w2mc")
-texture_hover = SubResource("AtlasTexture_6hfht")
-texture_disabled = SubResource("AtlasTexture_verhy")
-tex = SubResource("AtlasTexture_k1f6f")
+[node name="ResizeTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
 
-[node name="RandomButton" parent="Screen/Container/MarginContainer/GridContainer" instance=ExtResource("6_p75vb")]
-layout_mode = 2
-texture_normal = SubResource("AtlasTexture_dqtuo")
-texture_pressed = SubResource("AtlasTexture_d8aus")
-texture_hover = SubResource("AtlasTexture_ddhwx")
-texture_disabled = SubResource("AtlasTexture_p5uyl")
-tex = SubResource("AtlasTexture_qn5mv")
-
-[connection signal="value_changed" from="Screen/Container/MarginContainer/GridContainer/TimeSlider" to="." method="_on_time_slider_value_changed"]
-[connection signal="pressed" from="Screen/Container/MarginContainer/GridContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="Screen/Container/MarginContainer/GridContainer/DeleteButton" to="." method="_on_delete_button_pressed"]
-[connection signal="pressed" from="Screen/Container/MarginContainer/GridContainer/RandomButton" to="." method="_on_random_button_pressed"]
+[connection signal="pressed" from="Screen/Lines/Sep/Buttons/Content/GridContainer/DeleteButton" to="." method="_on_delete_button_pressed"]
+[connection signal="pressed" from="Screen/Lines/Sep/Buttons/Content/GridContainer/RandomButton" to="." method="_on_random_button_pressed"]
+[connection signal="changed_size" from="Screen/Lines/Sep/Rules" to="." method="_on_rules_changed_size"]
+[connection signal="game_changed" from="Screen/Lines/Sep/Rules" to="." method="_on_rules_game_changed"]
+[connection signal="value_changed" from="Screen/Lines/Time/Content/GridContainer/TimeSlider" to="." method="_on_time_slider_value_changed"]
+[connection signal="pressed" from="Screen/Lines/Time/Content/GridContainer/PlayButton" to="." method="_on_play_button_pressed"]

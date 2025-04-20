@@ -1,7 +1,7 @@
 extends Node
 class_name GameOfLife
 
-var SIZE = Vector2i(80,50)
+var SIZE: Vector2i
 
 const NORMAL_CELL = Vector2i(0,0)
 const BORDER_CELL = Vector2i(1,0)
@@ -16,7 +16,23 @@ const NEIGHBORS = [
 		Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1)
 	]
 
-const species = [
+var SPECIES = []
+
+const std_species = [
+	{
+		"name": "Conway",
+		"atlas": Vector2i(0,0),
+		"chance": 0.16,
+		"reproduction": {
+			"sum": [3],
+		},
+		"survival": {
+			"sum": [2,3]
+		}
+	}
+]
+
+const old_species = [
 	{
 		"name": "plants",
 		"atlas": Vector2i(1,1),
@@ -64,11 +80,16 @@ var KEY_DICT = {}
 
 var map = random_map()
 
+func _init(size=Vector2i(80,50), species=std_species):
+	SIZE = size
+	SPECIES = species
+	map = empty_map()
+
 # calculate maps
 
 func set_key_dict():
-	for i in len(species):
-		KEY_DICT[species[i]["name"]] = i
+	for i in len(SPECIES):
+		KEY_DICT[SPECIES[i]["name"]] = i
 
 func empty_map() -> Array:
 	var array = []
@@ -86,19 +107,19 @@ func random_map() -> Array:
 		array.resize(SIZE.y)
 		array.fill(EMPTY)
 		for y in SIZE.y:
-			for i in len(species):
-				if randf() <= species[i]["chance"]:
+			for i in len(SPECIES):
+				if randf() <= SPECIES[i]["chance"]:
 					array[y] = i
 		result.append(array)
 	return result
 
 func fulfills(requirements, x,y):
 	# species cannot survive
-	if not species[map[x][y]].has("survival"):
+	if not SPECIES[map[x][y]].has("survival"):
 		return false
 	# not sum requirements
 	var all_sums = 0
-	for i in len(species):
+	for i in len(SPECIES):
 		var sum = 0
 		for vector in NEIGHBORS:
 			var a = x + vector.x
@@ -113,7 +134,7 @@ func fulfills(requirements, x,y):
 				b = 0
 			sum += int(map[a][b] == i)
 		## check conditions
-		if requirements.has(species[i]["name"]) and sum not in requirements[species[i]["name"]]:
+		if requirements.has(SPECIES[i]["name"]) and sum not in requirements[SPECIES[i]["name"]]:
 			return false
 		else:
 			all_sums += sum
@@ -133,18 +154,22 @@ func get_next_step() -> Array:
 		for y in range(SIZE.y):
 			# check if species survives
 			if array[y] != EMPTY:
-				if not species[map[x][y]].has("survival") or not fulfills(species[map[x][y]]["survival"], x,y):
+				if not SPECIES[map[x][y]].has("survival") or not fulfills(SPECIES[map[x][y]]["survival"], x,y):
 					array[y] = EMPTY
 			# if empty: check if specise spreads to there
 			if array[y] == EMPTY:
-				for i in len(species):
+				for i in len(SPECIES):
 					if array[y] == EMPTY:
-						if species[i].has("reproduction") and fulfills(species[i]["reproduction"], x,y):
+						if SPECIES[i].has("reproduction") and fulfills(SPECIES[i]["reproduction"], x,y):
 							array[y] = i
 		new_map[x] = array
 	return new_map
 
 # operate with variables
+
+func set_size(new_size) -> void:
+	SIZE = new_size
+	map = random_map()
 
 func set_map(new_map) -> void:
 	map = new_map

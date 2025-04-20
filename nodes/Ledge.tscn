@@ -1,0 +1,140 @@
+[gd_scene load_steps=3 format=3 uid="uid://wuwrkpjf4c6n"]
+
+[ext_resource type="Script" path="res://nodes/Ledge.gd" id="1_nbxk5"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_slfln"]
+load_path = "res://.godot/imported/Panels.png-fc5610723fb1f78f210bc1b92e4b287e.ctex"
+
+[node name="Ledge" type="MarginContainer"]
+offset_right = 172.0
+offset_bottom = 24.0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("1_nbxk5")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_slfln")
+region_rect = Rect2(16, 0, 16, 16)
+patch_margin_left = 12
+patch_margin_top = 4
+patch_margin_right = 12
+patch_margin_bottom = 4
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 0
+
+[node name="Ledge" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="CheckBox0" type="CheckBox" parent="Margin/Ledge"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="CheckBox1" type="CheckBox" parent="Margin/Ledge"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="CheckBox2" type="CheckBox" parent="Margin/Ledge"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="CheckBox3" type="CheckBox" parent="Margin/Ledge"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="CheckBox4" type="CheckBox" parent="Margin/Ledge"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="CheckBox5" type="CheckBox" parent="Margin/Ledge"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="CheckBox6" type="CheckBox" parent="Margin/Ledge"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="CheckBox7" type="CheckBox" parent="Margin/Ledge"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="CheckBox8" type="CheckBox" parent="Margin/Ledge"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Skin" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="Label0" type="Label" parent="Margin/Skin"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="Label1" type="Label" parent="Margin/Skin"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "1"
+
+[node name="Label2" type="Label" parent="Margin/Skin"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "2"
+
+[node name="Label3" type="Label" parent="Margin/Skin"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "3"
+
+[node name="Label4" type="Label" parent="Margin/Skin"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "4"
+
+[node name="Label5" type="Label" parent="Margin/Skin"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "5"
+
+[node name="Label6" type="Label" parent="Margin/Skin"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "6"
+
+[node name="Label7" type="Label" parent="Margin/Skin"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "7"
+
+[node name="Label8" type="Label" parent="Margin/Skin"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "8"

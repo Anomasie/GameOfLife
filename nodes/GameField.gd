@@ -1,34 +1,35 @@
 @tool
-extends Control
+extends MarginContainer
 
 const BORDER_CELL = Vector2i(1,0)
 
 var game = GameOfLife.new()
-
 var current_species = 0
 
 # states
 var marking = false
 var deleting = false
 
-@onready var Map = $Field/Map
+@onready var Map = $Margin/Field/Map
+@onready var Field = $Margin/Field
 @onready var WorldTime = $WorldTime
 
+@onready var Margin = $Margin
+@onready var Background = $Background
+
 func _ready() -> void:
-	# set scale
-	var scale_factor = min(self.size.x/game.SIZE.x, self.size.y/game.SIZE.y)
-	Map.scale = scale_factor * Vector2i(1,1)
-	
 	# load map
 	load_map()
+	await get_tree().process_frame
+	self.resize()
 
 func _input(event):
 	if event.is_action_pressed("scroll_down"):
 		current_species -= 1
 	if event.is_action_pressed("scroll_up"):
 		current_species += 1
-	if current_species < 0: current_species = len(game.species) - 1
-	elif current_species >= len(game.species): current_species = 0
+	if current_species < 0: current_species = len(game.SPECIES) - 1
+	elif current_species >= len(game.SPECIES): current_species = 0
 
 func _process(_delta: float) -> void:
 	if marking or deleting:
@@ -40,10 +41,26 @@ func _process(_delta: float) -> void:
 		if mouse_pos_atlas.x >= 0 and mouse_pos_atlas.x < game.SIZE.x and mouse_pos_atlas.y >= 0 and mouse_pos_atlas.y < game.SIZE.y:
 			if marking:
 				game.map[mouse_pos_atlas.x][mouse_pos_atlas.y] = current_species
-				Map.set_cell(Vector2i(mouse_pos_atlas.x, mouse_pos_atlas.y), 0, game.species[current_species]["atlas"])
+				Map.set_cell(Vector2i(mouse_pos_atlas.x, mouse_pos_atlas.y), 0, game.SPECIES[current_species]["atlas"])
 			if deleting:
 				game.map[mouse_pos_atlas.x][mouse_pos_atlas.y] = game.EMPTY
 				Map.erase_cell(Vector2i(mouse_pos_atlas.x, mouse_pos_atlas.y))
+
+func resize(new_size=Field.size):
+	# set scale
+	var scale_factor = min(new_size.x/game.SIZE.x, new_size.y/game.SIZE.y)
+	Map.scale = scale_factor * Vector2i(1,1)
+	Background.size = scale_factor * game.SIZE + Vector2(32,32)
+
+func set_game_size(new_size):
+	Map.clear()
+	game.set_size(new_size)
+	resize()
+
+func set_game(new_game):
+	game = new_game
+	load_map(new_game.random_map())
+	self.resize()
 
 # actions from GAME
 
@@ -69,14 +86,6 @@ func load_map(map=game.random_map()) -> void:
 	# delete everything
 	Map.clear()
 	
-	# set frame
-	for x in range(game.SIZE.x + 2):
-		Map.set_cell(Vector2i(x-1,-1), 0, BORDER_CELL)
-		Map.set_cell(Vector2i(x-1,game.SIZE.y), 0, BORDER_CELL)
-	for y in range(game.SIZE.y):
-		Map.set_cell(Vector2i(-1,y), 0, BORDER_CELL)
-		Map.set_cell(Vector2i(game.SIZE.x,y), 0, BORDER_CELL)
-	
 	# set interior
 	game.map = map
 	set_map()
@@ -97,7 +106,7 @@ func set_map(new_map = game.map) -> void:
 			if game.map[x][y] == game.EMPTY:
 				Map.erase_cell(Vector2i(x,y))
 			else:
-				Map.set_cell(Vector2i(x,y), 0, game.species[game.map[x][y]]["atlas"])
+				Map.set_cell(Vector2i(x,y), 0, game.SPECIES[game.map[x][y]]["atlas"])
 
 func next_step() -> void:
 	set_map(game.get_next_step())

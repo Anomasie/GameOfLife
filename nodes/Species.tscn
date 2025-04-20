@@ -1,0 +1,90 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2mxk45drj2c0"]
+
+[ext_resource type="PackedScene" uid="uid://wuwrkpjf4c6n" path="res://nodes/Ledge.tscn" id="1_tmx5u"]
+[ext_resource type="Script" path="res://nodes/Species.gd" id="1_wbpjg"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kxfam"]
+load_path = "res://.godot/imported/Panels.png-fc5610723fb1f78f210bc1b92e4b287e.ctex"
+
+[node name="Species" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("1_wbpjg")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_kxfam")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 12
+patch_margin_top = 4
+patch_margin_right = 12
+patch_margin_bottom = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="Lines" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="HFlowContainer" parent="MarginContainer/Lines"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+
+[node name="NameLabel" type="Label" parent="MarginContainer/Lines/GridContainer"]
+visible = false
+layout_mode = 2
+text = "Name"
+
+[node name="NameEdit" type="LineEdit" parent="MarginContainer/Lines/GridContainer"]
+visible = false
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Plancton"
+
+[node name="ChanceLabel" type="Label" parent="MarginContainer/Lines/GridContainer"]
+layout_mode = 2
+text = "Spawn chance"
+
+[node name="ChanceEdit" type="SpinBox" parent="MarginContainer/Lines/GridContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.32
+
+[node name="Label" type="Label" parent="MarginContainer/Lines"]
+layout_mode = 2
+text = "Requirements"
+
+[node name="SurvivalContainer" type="VBoxContainer" parent="MarginContainer/Lines"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SurvivalLabel" type="Label" parent="MarginContainer/Lines/SurvivalContainer"]
+layout_mode = 2
+text = "Survival"
+
+[node name="Ledge" parent="MarginContainer/Lines/SurvivalContainer" instance=ExtResource("1_tmx5u")]
+layout_mode = 2
+
+[node name="ReprContainer" type="VBoxContainer" parent="MarginContainer/Lines"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ReprLabel" type="Label" parent="MarginContainer/Lines/ReprContainer"]
+layout_mode = 2
+text = "Reproduction"
+
+[node name="Ledge" parent="MarginContainer/Lines/ReprContainer" instance=ExtResource("1_tmx5u")]
+layout_mode = 2
+
+[connection signal="text_submitted" from="MarginContainer/Lines/GridContainer/NameEdit" to="." method="_on_name_edit_text_submitted"]
+[connection signal="boxes_changed" from="MarginContainer/Lines/SurvivalContainer/Ledge" to="." method="_on_ledge_boxes_changed"]
+[connection signal="boxes_changed" from="MarginContainer/Lines/ReprContainer/Ledge" to="." method="_on_ledge_boxes_changed"]

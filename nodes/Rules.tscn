@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://c78j7mxkldpbi"]
+
+[ext_resource type="Script" path="res://nodes/Rules.gd" id="1_1cuho"]
+[ext_resource type="Texture2D" uid="uid://ci0wgmt623rqk" path="res://assets/textures/Panels.png" id="1_2uerk"]
+[ext_resource type="PackedScene" uid="uid://b2mxk45drj2c0" path="res://nodes/Species.tscn" id="2_3pv0o"]
+
+[node name="Rules" type="MarginContainer"]
+size_flags_horizontal = 8
+size_flags_vertical = 4
+script = ExtResource("1_1cuho")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_2uerk")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 12
+patch_margin_top = 4
+patch_margin_right = 12
+patch_margin_bottom = 4
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="Lines" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Lines"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Rules"
+
+[node name="Sep" type="HBoxContainer" parent="Margin/Lines"]
+layout_mode = 2
+
+[node name="LineEditX" type="SpinBox" parent="Margin/Lines/Sep"]
+layout_mode = 2
+allow_greater = true
+
+[node name="times" type="Label" parent="Margin/Lines/Sep"]
+layout_mode = 2
+text = "x"
+
+[node name="LineEditY" type="SpinBox" parent="Margin/Lines/Sep"]
+layout_mode = 2
+allow_greater = true
+
+[node name="Species" parent="Margin/Lines" instance=ExtResource("2_3pv0o")]
+layout_mode = 2
+
+[connection signal="value_changed" from="Margin/Lines/Sep/LineEditX" to="." method="_on_line_edit_x_value_changed"]
+[connection signal="value_changed" from="Margin/Lines/Sep/LineEditY" to="." method="_on_line_edit_y_value_changed"]
+[connection signal="species_changed" from="Margin/Lines/Species" to="." method="_on_species_species_changed"]

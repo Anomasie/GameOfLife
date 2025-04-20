@@ -1,17 +1,35 @@
 extends Control
 
-@onready var GameField = $Margin/GameField
+@onready var GameField = $Screen/Lines/Sep/GameField
 
-@onready var PlayButton = $Screen/Container/MarginContainer/GridContainer/PlayButton
+# buttons
+
+@onready var PlayButton = $Screen/Lines/Time/Content/GridContainer/PlayButton
+
+# time
 
 const TIME_SLIDER_HALF_VALUE = 1
-@onready var TimeSlider = $Screen/Container/MarginContainer/GridContainer/TimeSlider
+@onready var TimeSlider = $Screen/Lines/Time/Content/GridContainer/TimeSlider
 
 const STANDARD_TIME = 0.1
 var last_time = STANDARD_TIME
 
+# rules
+
+@onready var Rules = $Screen/Lines/Sep/Rules
+
+# ready
+
 func _ready() -> void:
+	Rules.set_rules(GameField.game)
 	TimeSlider.value = slider_descaled(STANDARD_TIME)
+	# connect
+	get_tree().get_root().size_changed.connect(resize) 
+
+func resize():
+	$ResizeTimer.start()
+	await $ResizeTimer.timeout
+	GameField.resize()
 
 # buttons
 
@@ -51,3 +69,11 @@ func _on_time_slider_value_changed(value: float) -> void:
 		PlayButton.set_disabled(false)
 	
 	last_time = scaled_value
+
+# rules
+
+func _on_rules_changed_size(new_size) -> void:
+	GameField.set_game_size(new_size)
+
+func _on_rules_game_changed(new_game) -> void:
+	GameField.set_game(new_game)
