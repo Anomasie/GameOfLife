@@ -2,8 +2,13 @@ extends MarginContainer
 
 signal boxes_changed
 
-@onready var Boxes = $Margin/Ledge.get_children()
-@onready var Labels = $Margin/Skin.get_children()
+@onready var Sum = $Margin/Sep/Control/Sum
+@onready var Quad = $Margin/Sep/Control/Quad
+
+@onready var Boxes = $Margin/Sep/Container/Ledge.get_children()
+@onready var Labels = $Margin/Sep/Container/Skin.get_children()
+
+var my_name : String
 
 func _ready():
 	for i in len(Boxes):
@@ -15,9 +20,14 @@ func read_boxes() -> Array:
 		if Boxes[i].button_pressed: array.append(i)
 	return array
 
-func set_boxes(array) -> void:
+func set_boxes(array, new_name, color) -> void:
+	my_name = new_name
 	for i in len(Boxes):
 		Boxes[i].button_pressed = i in array
+	Sum.visible = typeof(color) == TYPE_NIL
+	Quad.visible = not Sum.visible
+	if typeof(color) != TYPE_NIL:
+		Quad.modulate = color
 	coordinate_boxes()
 
 func _on_box_pressed():

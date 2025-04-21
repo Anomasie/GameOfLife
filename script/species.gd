@@ -1,15 +1,11 @@
 extends Node
 class_name Species
 
-var my_name = "Conway"
-var color = (Color.from_hsv(randf(), randf(), randf()) + Color.WHITE)/2
+var my_name : String
+var color = (Color.from_hsv(randf(), 1, 1) + Color.WHITE)/2
 var chance = 0.16
-var reproduction = {
-	"sum": [3]
-}
-var survival = {
-	"sum": [2,3]
-}
+var reproduction = {}
+var survival = {}
 
 # three examples:
 const dict_plants = {
@@ -53,6 +49,19 @@ const dict_predator = {
 		"predator": [0,1,2]
 	}
 }
+
+static func generate_word(length=10, chars="abcdefghijklmnopqrstuvwxyz"):
+	var word: String
+	var n_char = len(chars)
+	for i in range(length):
+		word += chars[randi()% n_char]
+	return word
+
+func _init():
+	my_name = generate_word(10)
+	# Conway's game of life rules
+	reproduction[my_name] = [3]
+	survival[my_name] = [2,3]
 
 func to_dict() -> Dictionary:
 	var dict = {}

@@ -110,6 +110,14 @@ func load_random_map() -> void:
 	map = game.random_map()
 	set_map()
 
+func delete_species(index) -> void:
+	for x in range(game.SIZE.x):
+		for y in range(game.SIZE.y):
+			if map[x][y] == index:
+				map[x][y] = game.EMPTY
+			elif map[x][y] > index:
+				map[x][y] -= 1
+
 func read_map() -> void:
 	for x in range(game.SIZE.x):
 		var array = []

@@ -75,7 +75,9 @@ func _on_time_slider_value_changed(value: float) -> void:
 func _on_rules_changed_size(new_size) -> void:
 	GameField.set_game_size(new_size)
 
-func _on_rules_game_changed(new_game) -> void:
+func _on_rules_game_changed(new_game, deleted_species=-1) -> void:
+	if deleted_species >= 0:
+		GameField.delete_species(deleted_species)
 	GameField.set_game(new_game)
 
 func _on_rules_please_change_color() -> void:
@@ -91,3 +93,7 @@ func _on_color_sliders_color_changed() -> void:
 
 func _on_rules_changed_current_species(index) -> void:
 	GameField.set_current_species(index)
+
+
+func _on_debug_button_pressed() -> void:
+	print(GameField.Maps)

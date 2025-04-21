@@ -7,19 +7,19 @@
 [ext_resource type="Texture2D" uid="uid://bgkxnq1p0b2kd" path="res://assets/textures/Buttons.png" id="5_nssgp"]
 [ext_resource type="PackedScene" uid="uid://2is183cj7wat" path="res://nodes/buttons/SpeciesButton.tscn" id="6_4dwvm"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0p14b"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wntd5"]
 atlas = ExtResource("5_nssgp")
 region = Rect2(0, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j0ll5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6nck"]
 atlas = ExtResource("5_nssgp")
 region = Rect2(64, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2jgvf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wiqcw"]
 atlas = ExtResource("5_nssgp")
 region = Rect2(32, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_p785v"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sr1qu"]
 atlas = ExtResource("5_nssgp")
 region = Rect2(96, 192, 32, 32)
 
@@ -27,19 +27,19 @@ region = Rect2(96, 192, 32, 32)
 atlas = ExtResource("5_nssgp")
 region = Rect2(0, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_igrl0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_liswh"]
 atlas = ExtResource("5_nssgp")
 region = Rect2(0, 224, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4l104"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_aw6id"]
 atlas = ExtResource("5_nssgp")
 region = Rect2(64, 224, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rydav"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lco6o"]
 atlas = ExtResource("5_nssgp")
 region = Rect2(32, 224, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yw5mr"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojhkl"]
 atlas = ExtResource("5_nssgp")
 region = Rect2(96, 224, 32, 32)
 
@@ -96,10 +96,10 @@ layout_mode = 2
 
 [node name="AddButton" parent="Margin/Lines/SpeciesList" instance=ExtResource("4_y55nq")]
 layout_mode = 2
-texture_normal = SubResource("AtlasTexture_0p14b")
-texture_pressed = SubResource("AtlasTexture_j0ll5")
-texture_hover = SubResource("AtlasTexture_2jgvf")
-texture_disabled = SubResource("AtlasTexture_p785v")
+texture_normal = SubResource("AtlasTexture_wntd5")
+texture_pressed = SubResource("AtlasTexture_k6nck")
+texture_hover = SubResource("AtlasTexture_wiqcw")
+texture_disabled = SubResource("AtlasTexture_sr1qu")
 tex = SubResource("AtlasTexture_fufe3")
 
 [node name="SpeciesButtons" type="HBoxContainer" parent="Margin/Lines/SpeciesList"]
@@ -110,15 +110,15 @@ theme_override_constants/separation = 2
 
 [node name="DeleteButton" parent="Margin/Lines/SpeciesList" instance=ExtResource("4_y55nq")]
 layout_mode = 2
-texture_normal = SubResource("AtlasTexture_igrl0")
-texture_pressed = SubResource("AtlasTexture_4l104")
-texture_hover = SubResource("AtlasTexture_rydav")
-texture_disabled = SubResource("AtlasTexture_yw5mr")
+texture_normal = SubResource("AtlasTexture_liswh")
+texture_pressed = SubResource("AtlasTexture_aw6id")
+texture_hover = SubResource("AtlasTexture_lco6o")
+texture_disabled = SubResource("AtlasTexture_ojhkl")
 tex = SubResource("AtlasTexture_476xq")
 
 [connection signal="value_changed" from="Margin/Lines/Sep/LineEditX" to="." method="_on_line_edit_x_value_changed"]
 [connection signal="value_changed" from="Margin/Lines/Sep/LineEditY" to="." method="_on_line_edit_y_value_changed"]
-[connection signal="please_change_color" from="Margin/Lines/SpeciesEditor" to="." method="_on_species_please_change_color"]
-[connection signal="species_changed" from="Margin/Lines/SpeciesEditor" to="." method="_on_species_species_changed"]
+[connection signal="please_change_color" from="Margin/Lines/SpeciesEditor" to="." method="_on_species_editor_please_change_color"]
+[connection signal="species_changed" from="Margin/Lines/SpeciesEditor" to="." method="_on_species_editor_species_changed"]
 [connection signal="pressed" from="Margin/Lines/SpeciesList/AddButton" to="." method="_on_add_button_pressed"]
 [connection signal="pressed" from="Margin/Lines/SpeciesList/DeleteButton" to="." method="_on_delete_button_pressed"]

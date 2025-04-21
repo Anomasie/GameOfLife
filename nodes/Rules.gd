@@ -17,6 +17,8 @@ signal please_change_color
 @onready var AddButton = $Margin/Lines/SpeciesList/AddButton
 @onready var DeleteButton = $Margin/Lines/SpeciesList/DeleteButton
 
+const RANDOM_TRANSLATION = 0.185618
+
 var current_species = 0
 var disabled = 0
 
@@ -37,19 +39,23 @@ func _input(event):
 			current_species = len(game.SPECIES) - 1
 		elif current_species >= len(game.SPECIES):
 			current_species = 0
+		load_species()
 		changed_current_species.emit(current_species)
 
 func load_species(i=current_species) -> void:
 	current_species = i
 	changed_current_species.emit(current_species)
-	SpeciesEditor.set_species(game.SPECIES[i])
+	var color_dict = {}
+	for j in len(game.SPECIES):
+		color_dict[game.SPECIES[j].my_name] = game.SPECIES[j].color
+	SpeciesEditor.set_species(game.SPECIES[i], color_dict)
 
 func set_rules(new_game) -> void:
 	disabled += 1
 	game = new_game
 	EditX.value = new_game.SIZE.x
 	EditY.value = new_game.SIZE.y
-	SpeciesEditor.set_species(new_game.SPECIES[current_species])
+	load_species()
 	disabled -= 1
 
 func set_species(new_species : Array) -> void:
@@ -73,8 +79,11 @@ func set_species(new_species : Array) -> void:
 
 func change_color(new_color : Color, index = current_species) -> void:
 	game.SPECIES[index].color = new_color
-	SpeciesEditor.change_color(new_color)
+	SpeciesEditor.set_species(game.SPECIES[index])
 	self.set_species(game.SPECIES)
+
+func _on_species_editor_please_change_color() -> void:
+	please_change_color.emit()
 
 # signals
 
@@ -86,16 +95,11 @@ func _on_line_edit_y_value_changed(value: int) -> void:
 	if disabled == 0:
 		changed_size.emit(Vector2i(EditX.value, value))
 
-func _on_species_species_changed(new_species) -> void:
+func _on_species_editor_species_changed(new_species) -> void:
 	if disabled == 0:
-		var new_game = GameOfLife.new(
-			Vector2i(EditX.value, EditY.value),
-			[new_species]
-		)
-		game_changed.emit(new_game)
-
-func _on_species_please_change_color() -> void:
-	please_change_color.emit()
+		game.SIZE = Vector2i(EditX.value, EditY.value)
+		game.SPECIES[current_species] = new_species
+		game_changed.emit(game)
 
 # multiple species
 
@@ -103,6 +107,7 @@ func check_if_buttons_should_be_disabled():
 	DeleteButton.disabled = len(SpeciesButtons) == 0
 
 func add_species_ui(species = Species.new()) -> void:
+	species.color = Color.from_hsv((len(game.SPECIES)+1) * RANDOM_TRANSLATION, 1, 1)
 	# manage nodes
 	SpeciesButtonsParent.add_child(SpeciesButtonScene.instantiate())
 	SpeciesButtons.append(SpeciesButtonsParent.get_child(-1))
@@ -130,13 +135,13 @@ func _on_delete_button_pressed() -> void:
 	game.SPECIES.remove_at(current_species)
 	delete_species_ui(current_species)
 	if disabled == 0:
-		game_changed.emit(game)
+		game_changed.emit(game, current_species)
 	# load next species
 	if current_species > len(game.SPECIES):
 		current_species = len(game.SPECIES) - 1
-	load_species(current_species)
+	load_species(0)
 
-func _on_species_button_pressed():
+func _on_species_button_pressed() -> void:
 	for i in len(SpeciesButtons):
 		if SpeciesButtons[i].was_pressed:
 			load_species(i)

@@ -3,20 +3,41 @@ extends MarginContainer
 signal species_changed
 signal please_change_color
 
+@export var LedgeScene : PackedScene
+
 @onready var Name = $MarginContainer/Lines/GridContainer/NameEdit
 @onready var Chance = $MarginContainer/Lines/GridContainer/ChanceEdit
-@onready var RLedge = $MarginContainer/Lines/ReprContainer/Ledge
-@onready var SLedge = $MarginContainer/Lines/SurvivalContainer/Ledge
+@onready var RLedges = $MarginContainer/Lines/ReprContainer
+@onready var SLedges = $MarginContainer/Lines/SurvivalContainer
 @onready var ColorTexture = $MarginContainer/Lines/GridContainer/ColorTexture
 
-func set_species(species) -> void:
+func set_species(species, color_dict) -> void:
 	if typeof(species) != TYPE_DICTIONARY:
 		species = species.to_dict()
 	Name.placeholder_text = species["name"]
 	Chance.value = species["chance"]
 	ColorTexture.self_modulate = species["color"]
-	SLedge.set_boxes(species["survival"]["sum"])
-	RLedge.set_boxes(species["reproduction"]["sum"])
+	
+	set_ledges(species, "survival", SLedges, color_dict)
+	set_ledges(species, "reproduction", RLedges, color_dict)
+
+func set_ledges(species, type, Ledges, color_dict):
+	var len_requirements = len(species[type].keys())
+	if len_requirements < len(Ledges.get_children())+1: # add box
+		for i in len(Ledges.get_children())+1 - len_requirements:
+			Ledges.get_child(i + len_requirements - 1).hide()
+	elif len_requirements > len(Ledges.get_children())+1: # hide box
+		for i in len_requirements - len(Ledges.get_children())-1:
+			Ledges.add_child(LedgeScene.instantiate())
+	
+	Ledges.get_child(0).show()
+	for i in len_requirements:
+		var key = species[type].keys()[i]
+		var color
+		if key != "sum" and color_dict.has(key):
+			color = color_dict[key]
+		Ledges.get_child(i+1).set_boxes(species[type][key], key, color)
+		Ledges.get_child(i+1).show()
 
 func get_species() -> Species:
 	var dict = {}
@@ -24,16 +45,18 @@ func get_species() -> Species:
 	dict["chance"] = Chance.value
 	dict["color"] = ColorTexture.self_modulate
 	
-	dict["reproduction"] = {}
-	dict["reproduction"]["sum"] = RLedge.read_boxes()
-	
-	dict["survival"] = {}
-	dict["survival"]["sum"] = SLedge.read_boxes()
+	dict["reproduction"] = read_ledges(RLedges.get_children())
+	dict["survival"] = read_ledges(SLedges.get_children())
+#	dict["survival"]["sum"] = SLedge.read_boxes()
 	
 	return Species.from_dict(dict)
 
-func change_color(new_color) -> void:
-	ColorTexture.self_modulate = new_color
+func read_ledges(Ledges) -> Dictionary:
+	Ledges.remove_at(0)
+	var dict = {}
+	for Ledge in Ledges:
+		dict[Ledge.my_name] = Ledge.read_boxes()
+	return dict
 
 func _on_ledge_boxes_changed() -> void:
 	species_changed.emit(get_species())
