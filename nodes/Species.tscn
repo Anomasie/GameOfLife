@@ -105,6 +105,7 @@ text = "Reproduction"
 layout_mode = 2
 
 [connection signal="text_submitted" from="MarginContainer/Lines/GridContainer/NameEdit" to="." method="_on_name_edit_text_submitted"]
+[connection signal="value_changed" from="MarginContainer/Lines/GridContainer/ChanceEdit" to="." method="_on_chance_edit_value_changed"]
 [connection signal="pressed" from="MarginContainer/Lines/GridContainer/ColorTexture/ColorButton" to="." method="_on_color_button_pressed"]
 [connection signal="boxes_changed" from="MarginContainer/Lines/SurvivalContainer/Ledge" to="." method="_on_ledge_boxes_changed"]
 [connection signal="boxes_changed" from="MarginContainer/Lines/ReprContainer/Ledge" to="." method="_on_ledge_boxes_changed"]

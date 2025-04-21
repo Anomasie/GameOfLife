@@ -1,11 +1,10 @@
 extends MarginContainer
 
+signal changed_current_species
+
 signal changed_size
 signal game_changed
 signal please_change_color
-
-signal species_added
-signal species_deleted
 
 @export var SpeciesButtonScene : PackedScene
 
@@ -21,33 +20,47 @@ signal species_deleted
 var current_species = 0
 var disabled = 0
 
+var game : GameOfLife
+
 func _ready():
 	check_if_buttons_should_be_disabled()
 	await get_tree().process_frame
 	set_species(self.get_owner().GameField.game.SPECIES)
 
-func load_species(i=0) -> void:
-	if typeof(i) == TYPE_INT:
-		SpeciesEditor.set_species(self.get_owner().GameField.game.SPECIES[i])
-	else:
-		SpeciesEditor.set_species(i)
+func _input(event):
+	if event.is_action_pressed("scroll_down") or event.is_action_pressed("scroll_up"):
+		if event.is_action_pressed("scroll_down"):
+			current_species -= 1
+		if event.is_action_pressed("scroll_up"):
+			current_species += 1
+		if current_species < 0:
+			current_species = len(game.SPECIES) - 1
+		elif current_species >= len(game.SPECIES):
+			current_species = 0
+		changed_current_species.emit(current_species)
+
+func load_species(i=current_species) -> void:
+	current_species = i
+	changed_current_species.emit(current_species)
+	SpeciesEditor.set_species(game.SPECIES[i])
 
 func set_rules(new_game) -> void:
 	disabled += 1
+	game = new_game
 	EditX.value = new_game.SIZE.x
 	EditY.value = new_game.SIZE.y
-	SpeciesEditor.set_species(new_game.SPECIES[0])
+	SpeciesEditor.set_species(new_game.SPECIES[current_species])
 	disabled -= 1
 
-func set_species(new_species : Array = self.get_owner().GameField.game.SPECIES) -> void:
+func set_species(new_species : Array) -> void:
+	disabled += 1
+	game.SPECIES = new_species
 	if len(new_species) > len(SpeciesButtons):
 		for i in len(new_species) - len(SpeciesButtons):
-			SpeciesButtonsParent.add_child(SpeciesButtonScene.instantiate())
-			SpeciesButtons.append(SpeciesButtonsParent.get_child(-1))
+			add_species_ui(new_species[i+len(new_species)-1])
 	if len(new_species) < len(SpeciesButtons):
 		for i in len(SpeciesButtons) - len(new_species):
-			SpeciesButtons[-1].queue_free()
-			SpeciesButtons.pop_back()
+			delete_species_ui(i+len(new_species)-1)
 	# set interior
 	for i in len(SpeciesButtons):
 		SpeciesButtons[i].modulate = new_species[i].color
@@ -56,10 +69,12 @@ func set_species(new_species : Array = self.get_owner().GameField.game.SPECIES) 
 		load_species(current_species)
 	else:
 		load_species(0)
+	disabled -= 1
 
-func change_color(new_color : Color) -> void:
+func change_color(new_color : Color, index = current_species) -> void:
+	game.SPECIES[index].color = new_color
 	SpeciesEditor.change_color(new_color)
-	self.set_species()
+	self.set_species(game.SPECIES)
 
 # signals
 
@@ -87,28 +102,39 @@ func _on_species_please_change_color() -> void:
 func check_if_buttons_should_be_disabled():
 	DeleteButton.disabled = len(SpeciesButtons) == 0
 
-func _on_add_button_pressed() -> void:
+func add_species_ui(species = Species.new()) -> void:
+	# manage nodes
 	SpeciesButtonsParent.add_child(SpeciesButtonScene.instantiate())
 	SpeciesButtons.append(SpeciesButtonsParent.get_child(-1))
 	SpeciesButtons[-1].pressed.connect(_on_species_button_pressed)
-	
-	var new_species_data = Species.new()
-	
-	SpeciesButtons[-1].modulate = new_species_data.color
-	
-	species_added.emit(new_species_data)
-	load_species(new_species_data)
-	
+	SpeciesButtons[-1].modulate = species.color
+	# emit signals
 	check_if_buttons_should_be_disabled()
 
-func _on_delete_button_pressed() -> void:
-	SpeciesButtonsParent.get_child(current_species).queue_free()
-	SpeciesButtons.remove_at(current_species)
-	
-	species_deleted.emit(current_species)
-	load_species(current_species)
-	
+func delete_species_ui(index) -> void:
+	SpeciesButtonsParent.get_child(index).queue_free()
+	SpeciesButtons.remove_at(index)
+	# handle buttons and signals
 	check_if_buttons_should_be_disabled()
+
+func _on_add_button_pressed() -> void:
+	var new_species_data = Species.new()
+	game.SPECIES.append(new_species_data)
+	add_species_ui(new_species_data)
+	if disabled == 0:
+		game_changed.emit(game)
+	# load new species
+	load_species(len(game.SPECIES)-1)
+
+func _on_delete_button_pressed() -> void:
+	game.SPECIES.remove_at(current_species)
+	delete_species_ui(current_species)
+	if disabled == 0:
+		game_changed.emit(game)
+	# load next species
+	if current_species > len(game.SPECIES):
+		current_species = len(game.SPECIES) - 1
+	load_species(current_species)
 
 func _on_species_button_pressed():
 	for i in len(SpeciesButtons):

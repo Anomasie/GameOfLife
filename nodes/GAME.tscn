@@ -9,19 +9,19 @@
 [ext_resource type="PackedScene" uid="uid://c78j7mxkldpbi" path="res://nodes/Rules.tscn" id="7_uqs2r"]
 [ext_resource type="PackedScene" uid="uid://mtu0mxcjwc41" path="res://nodes/color-options/ColorSliders.tscn" id="8_uqrqp"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3erku"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_be1rc"]
 atlas = ExtResource("3_65sse")
 region = Rect2(0, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_33jrb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_64oq0"]
 atlas = ExtResource("3_65sse")
 region = Rect2(64, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ht4xo"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bx4n5"]
 atlas = ExtResource("3_65sse")
 region = Rect2(32, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yg85u"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4eyp8"]
 atlas = ExtResource("3_65sse")
 region = Rect2(96, 96, 32, 32)
 
@@ -29,19 +29,19 @@ region = Rect2(96, 96, 32, 32)
 atlas = ExtResource("3_65sse")
 region = Rect2(0, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dctax"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5r2l"]
 atlas = ExtResource("3_65sse")
 region = Rect2(0, 128, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3g48u"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_vngq2"]
 atlas = ExtResource("3_65sse")
 region = Rect2(64, 128, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mhn36"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjj1c"]
 atlas = ExtResource("3_65sse")
 region = Rect2(32, 128, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d0v0l"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1k3q"]
 atlas = ExtResource("3_65sse")
 region = Rect2(96, 128, 32, 32)
 
@@ -113,18 +113,18 @@ mouse_filter = 2
 
 [node name="DeleteButton" parent="Screen/Lines/Sep/Buttons/Content/GridContainer" instance=ExtResource("6_p75vb")]
 layout_mode = 2
-texture_normal = SubResource("AtlasTexture_3erku")
-texture_pressed = SubResource("AtlasTexture_33jrb")
-texture_hover = SubResource("AtlasTexture_ht4xo")
-texture_disabled = SubResource("AtlasTexture_yg85u")
+texture_normal = SubResource("AtlasTexture_be1rc")
+texture_pressed = SubResource("AtlasTexture_64oq0")
+texture_hover = SubResource("AtlasTexture_bx4n5")
+texture_disabled = SubResource("AtlasTexture_4eyp8")
 tex = SubResource("AtlasTexture_k1f6f")
 
 [node name="RandomButton" parent="Screen/Lines/Sep/Buttons/Content/GridContainer" instance=ExtResource("6_p75vb")]
 layout_mode = 2
-texture_normal = SubResource("AtlasTexture_dctax")
-texture_pressed = SubResource("AtlasTexture_3g48u")
-texture_hover = SubResource("AtlasTexture_mhn36")
-texture_disabled = SubResource("AtlasTexture_d0v0l")
+texture_normal = SubResource("AtlasTexture_d5r2l")
+texture_pressed = SubResource("AtlasTexture_vngq2")
+texture_hover = SubResource("AtlasTexture_qjj1c")
+texture_disabled = SubResource("AtlasTexture_u1k3q")
 tex = SubResource("AtlasTexture_qn5mv")
 
 [node name="GameField" parent="Screen/Lines/Sep" instance=ExtResource("1_unisr")]
@@ -170,6 +170,7 @@ tex_on = SubResource("AtlasTexture_cvfim")
 tex_off = SubResource("AtlasTexture_1641d")
 
 [node name="ColorSliders" parent="Screen" instance=ExtResource("8_uqrqp")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 8
 
@@ -179,11 +180,10 @@ one_shot = true
 
 [connection signal="pressed" from="Screen/Lines/Sep/Buttons/Content/GridContainer/DeleteButton" to="." method="_on_delete_button_pressed"]
 [connection signal="pressed" from="Screen/Lines/Sep/Buttons/Content/GridContainer/RandomButton" to="." method="_on_random_button_pressed"]
+[connection signal="changed_current_species" from="Screen/Lines/Sep/Rules" to="." method="_on_rules_changed_current_species"]
 [connection signal="changed_size" from="Screen/Lines/Sep/Rules" to="." method="_on_rules_changed_size"]
 [connection signal="game_changed" from="Screen/Lines/Sep/Rules" to="." method="_on_rules_game_changed"]
 [connection signal="please_change_color" from="Screen/Lines/Sep/Rules" to="." method="_on_rules_please_change_color"]
-[connection signal="species_added" from="Screen/Lines/Sep/Rules" to="." method="_on_rules_species_added"]
-[connection signal="species_deleted" from="Screen/Lines/Sep/Rules" to="." method="_on_rules_species_deleted"]
 [connection signal="value_changed" from="Screen/Lines/Time/Content/GridContainer/TimeSlider" to="." method="_on_time_slider_value_changed"]
 [connection signal="pressed" from="Screen/Lines/Time/Content/GridContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="color_changed" from="Screen/ColorSliders" to="." method="_on_color_sliders_color_changed"]

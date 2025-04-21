@@ -3,11 +3,6 @@ class_name GameOfLife
 
 var SIZE: Vector2i
 
-const NORMAL_CELL = Vector2i(0,0)
-const BORDER_CELL = Vector2i(1,0)
-const NEW_CELL = Vector2i(1,1)
-const FULL_CELL = Vector2i(0,1)
-
 const EMPTY = -1
 
 const NEIGHBORS = [
@@ -20,12 +15,9 @@ var SPECIES = []
 
 var KEY_DICT = {}
 
-var map = random_map()
-
 func _init(size=Vector2i(40,25), species=[Species.new()]):
 	SIZE = size
 	SPECIES = species
-	map = empty_map()
 
 # calculate maps
 
@@ -55,7 +47,7 @@ func random_map() -> Array:
 		result.append(array)
 	return result
 
-func fulfills(requirements, x,y):
+func fulfills(map, requirements, x,y):
 	# not sum requirements
 	var all_sums = 0
 	for i in len(SPECIES):
@@ -83,7 +75,7 @@ func fulfills(requirements, x,y):
 	else:
 		return false
 
-func get_next_step() -> Array:
+func get_next_step(map) -> Array:
 	if len(KEY_DICT.keys()) == 0:
 		set_key_dict()
 	
@@ -93,13 +85,13 @@ func get_next_step() -> Array:
 		for y in range(SIZE.y):
 			# check if species survives
 			if array[y] != EMPTY:
-				if not fulfills(SPECIES[map[x][y]].survival, x,y):
+				if not fulfills(map, SPECIES[map[x][y]].survival, x,y):
 					array[y] = EMPTY
 			# if empty: check if specise spreads to there
 			if array[y] == EMPTY:
 				for i in len(SPECIES):
 					if array[y] == EMPTY:
-						if fulfills(SPECIES[i].reproduction, x,y):
+						if fulfills(map, SPECIES[i].reproduction, x,y):
 							array[y] = i
 		new_map[x] = array
 	return new_map
@@ -108,13 +100,9 @@ func get_next_step() -> Array:
 
 func set_size(new_size) -> void:
 	SIZE = new_size
-	map = random_map()
-
-func set_map(new_map) -> void:
-	map = new_map
 
 # help functions
 
-func print_matrix(mat=map) -> void:
+func print_matrix(mat) -> void:
 	for x in len(mat):
 		print(mat[x])

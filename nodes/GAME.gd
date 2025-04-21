@@ -88,8 +88,6 @@ func _on_color_sliders_color_changed() -> void:
 	GameField.change_current_color(color)
 	Rules.change_color(color)
 
-func _on_rules_species_added(new_species) -> void:
-	GameField.add_species(new_species)
 
-func _on_rules_species_deleted(index) -> void:
-	GameField.delete_species(index)
+func _on_rules_changed_current_species(index) -> void:
+	GameField.set_current_species(index)

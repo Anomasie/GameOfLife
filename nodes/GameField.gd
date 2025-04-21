@@ -4,9 +4,11 @@ extends MarginContainer
 const BORDER_CELL = Vector2i(1,0)
 
 var game = GameOfLife.new()
-var current_species = 0
+var map = game.random_map()
 
 # states
+var current_species = 0
+
 var marking = false
 var deleting = false
 
@@ -25,14 +27,6 @@ func _ready() -> void:
 	await get_tree().process_frame
 	self.resize()
 
-func _input(event):
-	if event.is_action_pressed("scroll_down"):
-		current_species -= 1
-	if event.is_action_pressed("scroll_up"):
-		current_species += 1
-	if current_species < 0: current_species = len(game.SPECIES) - 1
-	elif current_species >= len(game.SPECIES): current_species = 0
-
 func _process(_delta: float) -> void:
 	if marking or deleting:
 		var mouse_pos_relative_unscaled = get_viewport().get_mouse_position() - Field.get_global_position()
@@ -42,10 +36,10 @@ func _process(_delta: float) -> void:
 		)
 		if mouse_pos_atlas.x >= 0 and mouse_pos_atlas.x < game.SIZE.x and mouse_pos_atlas.y >= 0 and mouse_pos_atlas.y < game.SIZE.y:
 			if marking:
-				game.map[mouse_pos_atlas.x][mouse_pos_atlas.y] = current_species
+				map[mouse_pos_atlas.x][mouse_pos_atlas.y] = current_species
 				Maps[current_species].set_cell(Vector2i(mouse_pos_atlas.x, mouse_pos_atlas.y), 0, Vector2i(0,0))
 			if deleting:
-				game.map[mouse_pos_atlas.x][mouse_pos_atlas.y] = game.EMPTY
+				map[mouse_pos_atlas.x][mouse_pos_atlas.y] = game.EMPTY
 				Maps[current_species].erase_cell(Vector2i(mouse_pos_atlas.x, mouse_pos_atlas.y))
 
 func resize(new_size=Field.size):
@@ -53,6 +47,9 @@ func resize(new_size=Field.size):
 	var scale_factor = min(new_size.x/game.SIZE.x, new_size.y/game.SIZE.y)
 	Field.scale = scale_factor * Vector2i(1,1)
 	Background.size = scale_factor * game.SIZE + Vector2(32,32)
+
+func set_current_species(index):
+	current_species = index
 
 func set_game_size(new_size):
 	for Map in Maps:
@@ -63,12 +60,11 @@ func set_game_size(new_size):
 func set_game(new_game):
 	if new_game.SIZE != game.SIZE:
 		game = new_game
-		load_new_maps(game.random_map())
+		load_new_maps()
 		self.resize()
 	else:
-		new_game.map = game.map
 		game = new_game
-		load_new_maps(game.map)
+		load_new_maps()
 
 # actions from GAME
 
@@ -90,7 +86,7 @@ func delete_all() -> void:
 
 # map generation & management
 
-func load_new_maps(map=game.random_map()) -> void:
+func load_new_maps() -> void:
 	# delete everything
 	if len(game.SPECIES) > len(Maps):
 		for i in len(game.SPECIES) - len(Maps):
@@ -103,7 +99,6 @@ func load_new_maps(map=game.random_map()) -> void:
 	# set interior
 	for i in len(Maps):
 		Maps[i].self_modulate = game.SPECIES[i].color
-	game.map = map
 	set_map()
 
 func load_random_map() -> void:
@@ -112,7 +107,7 @@ func load_random_map() -> void:
 		Map.clear()
 	
 	# set interior
-	game.map = game.random_map()
+	map = game.random_map()
 	set_map()
 
 func read_map() -> void:
@@ -126,23 +121,23 @@ func read_map() -> void:
 			array[y] = int(typeof(data) != TYPE_NIL and data == game.NORMAL_CELL) * 2
 		game.map[x] = array
 
-func set_map(new_map = game.map) -> void:
-	game.set_map(new_map)
+func set_map(new_map = map) -> void:
+	map = new_map
 	for x in range(game.SIZE.x):
 		for y in range(game.SIZE.y):
-			if game.map[x][y] == game.EMPTY:
+			if map[x][y] == game.EMPTY:
 				for Map in Maps:
 					Map.erase_cell(Vector2i(x,y))
 			else:
-				Maps[game.map[x][y]].set_cell(Vector2i(x,y), 0, Vector2i(0,0))
+				Maps[map[x][y]].set_cell(Vector2i(x,y), 0, Vector2i(0,0))
 
 func next_step() -> void:
-	set_map(game.get_next_step())
+	set_map(game.get_next_step(map))
 
 func _on_world_time_timeout() -> void:
 	next_step()
 
-func print_matrix(mat=game.map) -> void:
+func print_matrix(mat=map) -> void:
 	for x in len(mat):
 		print(mat[x])
 
@@ -150,18 +145,6 @@ func print_matrix(mat=game.map) -> void:
 
 func change_current_color(new_color):
 	Maps[current_species].self_modulate = new_color
-
-## species amount
-
-func add_species(new_species):
-	var new_game = game
-	new_game.SPECIES.append(new_species)
-	self.set_game(new_game)
-
-func delete_species(index):
-	var new_game = game
-	new_game.SPECIES.remove_at(index)
-	self.set_game(new_game)
 
 # background button & marking cells
 
