@@ -1,7 +1,7 @@
 extends Node
 class_name GameOfLife
 
-var SIZE: Vector2i
+var SIZE = Vector2i(40,25)
 
 const EMPTY = -1
 

@@ -51,7 +51,7 @@ const dict_predator = {
 }
 
 static func generate_word(length=10, chars="abcdefghijklmnopqrstuvwxyz"):
-	var word: String
+	var word = ""
 	var n_char = len(chars)
 	for i in range(length):
 		word += chars[randi()% n_char]

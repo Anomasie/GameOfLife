@@ -21,7 +21,7 @@ var deleting = false
 @onready var Margin = $Margin
 @onready var Background = $Background
 
-func _ready() -> void:
+func _ready():
 	# load map
 	load_new_maps()
 	await get_tree().process_frame
@@ -47,6 +47,7 @@ func resize(new_size=Field.size):
 	var scale_factor = min(new_size.x/game.SIZE.x, new_size.y/game.SIZE.y)
 	Field.scale = scale_factor * Vector2i(1,1)
 	Background.size = scale_factor * game.SIZE + Vector2(32,32)
+	print(new_size.x/game.SIZE.x, " ", new_size.y/game.SIZE.y, " -> ", scale_factor)
 
 func set_current_species(index):
 	current_species = index
@@ -58,8 +59,9 @@ func set_game_size(new_size):
 	resize()
 
 func set_game(new_game):
-	if new_game.SIZE != game.SIZE:
+	if not game or new_game.SIZE != game.SIZE:
 		game = new_game
+		map = game.random_map()
 		load_new_maps()
 		self.resize()
 	else:
@@ -143,7 +145,8 @@ func next_step() -> void:
 	set_map(game.get_next_step(map))
 
 func _on_world_time_timeout() -> void:
-	next_step()
+	if map:
+		next_step()
 
 func print_matrix(mat=map) -> void:
 	for x in len(mat):

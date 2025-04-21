@@ -7,19 +7,19 @@
 [ext_resource type="Texture2D" uid="uid://bgkxnq1p0b2kd" path="res://assets/textures/Buttons.png" id="5_nssgp"]
 [ext_resource type="PackedScene" uid="uid://2is183cj7wat" path="res://nodes/buttons/SpeciesButton.tscn" id="6_4dwvm"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wntd5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yoyd"]
 atlas = ExtResource("5_nssgp")
 region = Rect2(0, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_k6nck"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ji4w"]
 atlas = ExtResource("5_nssgp")
 region = Rect2(64, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wiqcw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1xri"]
 atlas = ExtResource("5_nssgp")
 region = Rect2(32, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sr1qu"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4dswt"]
 atlas = ExtResource("5_nssgp")
 region = Rect2(96, 192, 32, 32)
 
@@ -27,19 +27,19 @@ region = Rect2(96, 192, 32, 32)
 atlas = ExtResource("5_nssgp")
 region = Rect2(0, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_liswh"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cswke"]
 atlas = ExtResource("5_nssgp")
 region = Rect2(0, 224, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_aw6id"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjdr8"]
 atlas = ExtResource("5_nssgp")
 region = Rect2(64, 224, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lco6o"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6tru"]
 atlas = ExtResource("5_nssgp")
 region = Rect2(32, 224, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ojhkl"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_o81c8"]
 atlas = ExtResource("5_nssgp")
 region = Rect2(96, 224, 32, 32)
 
@@ -96,10 +96,10 @@ layout_mode = 2
 
 [node name="AddButton" parent="Margin/Lines/SpeciesList" instance=ExtResource("4_y55nq")]
 layout_mode = 2
-texture_normal = SubResource("AtlasTexture_wntd5")
-texture_pressed = SubResource("AtlasTexture_k6nck")
-texture_hover = SubResource("AtlasTexture_wiqcw")
-texture_disabled = SubResource("AtlasTexture_sr1qu")
+texture_normal = SubResource("AtlasTexture_3yoyd")
+texture_pressed = SubResource("AtlasTexture_5ji4w")
+texture_hover = SubResource("AtlasTexture_j1xri")
+texture_disabled = SubResource("AtlasTexture_4dswt")
 tex = SubResource("AtlasTexture_fufe3")
 
 [node name="SpeciesButtons" type="HBoxContainer" parent="Margin/Lines/SpeciesList"]
@@ -110,10 +110,10 @@ theme_override_constants/separation = 2
 
 [node name="DeleteButton" parent="Margin/Lines/SpeciesList" instance=ExtResource("4_y55nq")]
 layout_mode = 2
-texture_normal = SubResource("AtlasTexture_liswh")
-texture_pressed = SubResource("AtlasTexture_aw6id")
-texture_hover = SubResource("AtlasTexture_lco6o")
-texture_disabled = SubResource("AtlasTexture_ojhkl")
+texture_normal = SubResource("AtlasTexture_cswke")
+texture_pressed = SubResource("AtlasTexture_fjdr8")
+texture_hover = SubResource("AtlasTexture_j6tru")
+texture_disabled = SubResource("AtlasTexture_o81c8")
 tex = SubResource("AtlasTexture_476xq")
 
 [connection signal="value_changed" from="Margin/Lines/Sep/LineEditX" to="." method="_on_line_edit_x_value_changed"]

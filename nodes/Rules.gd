@@ -22,12 +22,13 @@ const RANDOM_TRANSLATION = 0.185618
 var current_species = 0
 var disabled = 0
 
-var game : GameOfLife
+var game = GameOfLife.new()
 
 func _ready():
 	check_if_buttons_should_be_disabled()
 	await get_tree().process_frame
-	set_species(self.get_owner().GameField.game.SPECIES)
+	set_species(game.SPECIES)
+	game_changed.emit(game)
 
 func _input(event):
 	if event.is_action_pressed("scroll_down") or event.is_action_pressed("scroll_up"):

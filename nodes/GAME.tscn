@@ -9,19 +9,19 @@
 [ext_resource type="PackedScene" uid="uid://c78j7mxkldpbi" path="res://nodes/Rules.tscn" id="7_uqs2r"]
 [ext_resource type="PackedScene" uid="uid://mtu0mxcjwc41" path="res://nodes/color-options/ColorSliders.tscn" id="8_uqrqp"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jxnxf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4sj6s"]
 atlas = ExtResource("3_65sse")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3oa1f"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_medkx"]
 atlas = ExtResource("3_65sse")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mxm1f"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lln5"]
 atlas = ExtResource("3_65sse")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1we07"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wo5i"]
 atlas = ExtResource("3_65sse")
 region = Rect2(96, 0, 32, 32)
 
@@ -29,19 +29,19 @@ region = Rect2(96, 0, 32, 32)
 atlas = ExtResource("3_65sse")
 region = Rect2(0, 0, 33, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8v15o"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7ymp"]
 atlas = ExtResource("3_65sse")
 region = Rect2(0, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fbecm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjmdo"]
 atlas = ExtResource("3_65sse")
 region = Rect2(64, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ulm6a"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijd1m"]
 atlas = ExtResource("3_65sse")
 region = Rect2(32, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y0qys"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4v26f"]
 atlas = ExtResource("3_65sse")
 region = Rect2(96, 96, 32, 32)
 
@@ -49,19 +49,19 @@ region = Rect2(96, 96, 32, 32)
 atlas = ExtResource("3_65sse")
 region = Rect2(0, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ck4bk"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2fnc"]
 atlas = ExtResource("3_65sse")
 region = Rect2(0, 128, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_71gvr"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5cy1x"]
 atlas = ExtResource("3_65sse")
 region = Rect2(64, 128, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_micqt"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0djd8"]
 atlas = ExtResource("3_65sse")
 region = Rect2(32, 128, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6kho4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsfr8"]
 atlas = ExtResource("3_65sse")
 region = Rect2(96, 128, 32, 32)
 
@@ -112,10 +112,10 @@ theme_override_constants/separation = 0
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture_normal = SubResource("AtlasTexture_jxnxf")
-texture_pressed = SubResource("AtlasTexture_3oa1f")
-texture_hover = SubResource("AtlasTexture_mxm1f")
-texture_disabled = SubResource("AtlasTexture_1we07")
+texture_normal = SubResource("AtlasTexture_4sj6s")
+texture_pressed = SubResource("AtlasTexture_medkx")
+texture_hover = SubResource("AtlasTexture_3lln5")
+texture_disabled = SubResource("AtlasTexture_3wo5i")
 tex = SubResource("AtlasTexture_dewtf")
 
 [node name="Buttons" type="MarginContainer" parent="Screen/Lines/Sep"]
@@ -143,18 +143,18 @@ mouse_filter = 2
 
 [node name="DeleteButton" parent="Screen/Lines/Sep/Buttons/Content/GridContainer" instance=ExtResource("6_p75vb")]
 layout_mode = 2
-texture_normal = SubResource("AtlasTexture_8v15o")
-texture_pressed = SubResource("AtlasTexture_fbecm")
-texture_hover = SubResource("AtlasTexture_ulm6a")
-texture_disabled = SubResource("AtlasTexture_y0qys")
+texture_normal = SubResource("AtlasTexture_k7ymp")
+texture_pressed = SubResource("AtlasTexture_bjmdo")
+texture_hover = SubResource("AtlasTexture_ijd1m")
+texture_disabled = SubResource("AtlasTexture_4v26f")
 tex = SubResource("AtlasTexture_k1f6f")
 
 [node name="RandomButton" parent="Screen/Lines/Sep/Buttons/Content/GridContainer" instance=ExtResource("6_p75vb")]
 layout_mode = 2
-texture_normal = SubResource("AtlasTexture_ck4bk")
-texture_pressed = SubResource("AtlasTexture_71gvr")
-texture_hover = SubResource("AtlasTexture_micqt")
-texture_disabled = SubResource("AtlasTexture_6kho4")
+texture_normal = SubResource("AtlasTexture_q2fnc")
+texture_pressed = SubResource("AtlasTexture_5cy1x")
+texture_hover = SubResource("AtlasTexture_0djd8")
+texture_disabled = SubResource("AtlasTexture_fsfr8")
 tex = SubResource("AtlasTexture_qn5mv")
 
 [node name="GameField" parent="Screen/Lines/Sep" instance=ExtResource("1_unisr")]

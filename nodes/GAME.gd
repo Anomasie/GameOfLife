@@ -19,7 +19,6 @@ var last_time = STANDARD_TIME
 # ready
 
 func _ready() -> void:
-	Rules.set_rules(GameField.game)
 	TimeSlider.value = slider_descaled(STANDARD_TIME)
 	# connect
 	get_tree().get_root().size_changed.connect(resize)
