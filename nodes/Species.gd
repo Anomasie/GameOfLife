@@ -7,8 +7,8 @@ signal please_change_color
 
 @onready var Name = $MarginContainer/Lines/GridContainer/NameEdit
 @onready var Chance = $MarginContainer/Lines/GridContainer/ChanceEdit
-@onready var RLedges = $MarginContainer/Lines/ReprContainer
-@onready var SLedges = $MarginContainer/Lines/SurvivalContainer
+@onready var RLedges = $MarginContainer/Lines/Scroller/Requirements/ReprContainer
+@onready var SLedges = $MarginContainer/Lines/Scroller/Requirements/SurvivalContainer
 @onready var ColorTexture = $MarginContainer/Lines/GridContainer/ColorTexture
 
 func set_species(species, color_dict) -> void:
@@ -23,14 +23,18 @@ func set_species(species, color_dict) -> void:
 
 func set_ledges(species, type, Ledges, color_dict):
 	var len_requirements = len(species[type].keys())
-	if len_requirements < len(Ledges.get_children())+1: # add box
-		for i in len(Ledges.get_children())+1 - len_requirements:
-			Ledges.get_child(i + len_requirements - 1).hide()
-	elif len_requirements > len(Ledges.get_children())+1: # hide box
-		for i in len_requirements - len(Ledges.get_children())-1:
+	var len_ledges = len(Ledges.get_children())-1
+	
+	if len_requirements < len_ledges: # add box
+		for i in len_ledges - len_requirements + 1:
+			Ledges.get_child(i + len_requirements).hide()
+	elif len_requirements > len_ledges: # hide box
+		for i in len_requirements - len_ledges:
 			Ledges.add_child(LedgeScene.instantiate())
+			Ledges.get_child(-1).boxes_changed.connect(_on_ledge_boxes_changed)
 	
 	Ledges.get_child(0).show()
+	
 	for i in len_requirements:
 		var key = species[type].keys()[i]
 		var color

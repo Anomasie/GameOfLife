@@ -61,7 +61,9 @@ func _init():
 	my_name = generate_word(10)
 	# Conway's game of life rules
 	reproduction[my_name] = [3]
+	reproduction["sum"] = [3]
 	survival[my_name] = [2,3]
+	survival["sum"] = [2,3]
 
 func to_dict() -> Dictionary:
 	var dict = {}

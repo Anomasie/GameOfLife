@@ -1,4 +1,4 @@
-@tool
+#@tool
 extends MarginContainer
 
 const BORDER_CELL = Vector2i(1,0)
@@ -44,10 +44,11 @@ func _process(_delta: float) -> void:
 
 func resize(new_size=Field.size):
 	# set scale
-	var scale_factor = min(new_size.x/game.SIZE.x, new_size.y/game.SIZE.y)
+	var scale_factor = 1.0
+	if game.SIZE.x > 0:
+		scale_factor = min(new_size.x/game.SIZE.x, new_size.y/game.SIZE.y)
 	Field.scale = scale_factor * Vector2i(1,1)
 	Background.size = scale_factor * game.SIZE + Vector2(32,32)
-	print(new_size.x/game.SIZE.x, " ", new_size.y/game.SIZE.y, " -> ", scale_factor)
 
 func set_current_species(index):
 	current_species = index
@@ -56,17 +57,18 @@ func set_game_size(new_size):
 	for Map in Maps:
 		Map.clear()
 	game.set_size(new_size)
+	map = game.random_map()
 	resize()
 
 func set_game(new_game):
 	if not game or new_game.SIZE != game.SIZE:
 		game = new_game
 		map = game.random_map()
-		load_new_maps()
-		self.resize()
 	else:
 		game = new_game
-		load_new_maps()
+	load_new_maps()
+	await get_tree().process_frame
+	self.resize()
 
 # actions from GAME
 
@@ -100,7 +102,7 @@ func load_new_maps() -> void:
 			Maps.pop_back()
 	# set interior
 	for i in len(Maps):
-		Maps[i].self_modulate = game.SPECIES[i].color
+		Maps[i].modulate = game.SPECIES[i].color
 	set_map()
 
 func load_random_map() -> void:
@@ -155,7 +157,7 @@ func print_matrix(mat=map) -> void:
 ## colors
 
 func change_current_color(new_color):
-	Maps[current_species].self_modulate = new_color
+	Maps[current_species].modulate = new_color
 
 # background button & marking cells
 

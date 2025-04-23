@@ -21,6 +21,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 script = ExtResource("1_wbpjg")
+LedgeScene = ExtResource("1_tmx5u")
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 2
@@ -43,10 +44,12 @@ theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 
 [node name="NameLabel" type="Label" parent="MarginContainer/Lines/GridContainer"]
+visible = false
 layout_mode = 2
 text = "Name"
 
 [node name="NameEdit" type="LineEdit" parent="MarginContainer/Lines/GridContainer"]
+visible = false
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -82,30 +85,40 @@ grow_vertical = 2
 layout_mode = 2
 text = "Requirements"
 
-[node name="SurvivalContainer" type="VBoxContainer" parent="MarginContainer/Lines"]
+[node name="Scroller" type="ScrollContainer" parent="MarginContainer/Lines"]
+custom_minimum_size = Vector2(210, 112)
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="Requirements" type="VBoxContainer" parent="MarginContainer/Lines/Scroller"]
+layout_mode = 2
+
+[node name="SurvivalContainer" type="VBoxContainer" parent="MarginContainer/Lines/Scroller/Requirements"]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="SurvivalLabel" type="Label" parent="MarginContainer/Lines/SurvivalContainer"]
+[node name="SurvivalLabel" type="Label" parent="MarginContainer/Lines/Scroller/Requirements/SurvivalContainer"]
 layout_mode = 2
 text = "Survival"
 
-[node name="Ledge" parent="MarginContainer/Lines/SurvivalContainer" instance=ExtResource("1_tmx5u")]
+[node name="Ledge" parent="MarginContainer/Lines/Scroller/Requirements/SurvivalContainer" instance=ExtResource("1_tmx5u")]
 layout_mode = 2
 
-[node name="ReprContainer" type="VBoxContainer" parent="MarginContainer/Lines"]
+[node name="ReprContainer" type="VBoxContainer" parent="MarginContainer/Lines/Scroller/Requirements"]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="ReprLabel" type="Label" parent="MarginContainer/Lines/ReprContainer"]
+[node name="ReprLabel" type="Label" parent="MarginContainer/Lines/Scroller/Requirements/ReprContainer"]
 layout_mode = 2
 text = "Reproduction"
 
-[node name="Ledge" parent="MarginContainer/Lines/ReprContainer" instance=ExtResource("1_tmx5u")]
+[node name="Ledge" parent="MarginContainer/Lines/Scroller/Requirements/ReprContainer" instance=ExtResource("1_tmx5u")]
 layout_mode = 2
 
 [connection signal="text_submitted" from="MarginContainer/Lines/GridContainer/NameEdit" to="." method="_on_name_edit_text_submitted"]
 [connection signal="value_changed" from="MarginContainer/Lines/GridContainer/ChanceEdit" to="." method="_on_chance_edit_value_changed"]
 [connection signal="pressed" from="MarginContainer/Lines/GridContainer/ColorTexture/ColorButton" to="." method="_on_color_button_pressed"]
-[connection signal="boxes_changed" from="MarginContainer/Lines/SurvivalContainer/Ledge" to="." method="_on_ledge_boxes_changed"]
-[connection signal="boxes_changed" from="MarginContainer/Lines/ReprContainer/Ledge" to="." method="_on_ledge_boxes_changed"]
+[connection signal="boxes_changed" from="MarginContainer/Lines/Scroller/Requirements/SurvivalContainer/Ledge" to="." method="_on_ledge_boxes_changed"]
+[connection signal="boxes_changed" from="MarginContainer/Lines/Scroller/Requirements/ReprContainer/Ledge" to="." method="_on_ledge_boxes_changed"]

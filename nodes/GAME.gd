@@ -95,4 +95,4 @@ func _on_rules_changed_current_species(index) -> void:
 
 
 func _on_debug_button_pressed() -> void:
-	print(GameField.Maps)
+	GameField.resize()

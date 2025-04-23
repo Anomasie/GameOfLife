@@ -4,6 +4,7 @@ class_name GameOfLife
 var SIZE = Vector2i(40,25)
 
 const EMPTY = -1
+const FULL_ARRAY = [0,1,2,3,4,5,6,7,8]
 
 const NEIGHBORS = [
 		Vector2i(-1,-1), Vector2i(0,-1), Vector2i(1,-1),
@@ -21,9 +22,15 @@ func _init(size=Vector2i(40,25), species=[Species.new()]):
 
 # calculate maps
 
-func set_key_dict():
+func set_key_dict() -> void:
 	for i in len(SPECIES):
 		KEY_DICT[SPECIES[i].my_name] = i
+
+func get_color_dict() -> Dictionary:
+	var dict = {}
+	for species in SPECIES:
+		dict[species.name] = species.color
+	return dict
 
 func empty_map() -> Array:
 	var array = []
@@ -47,7 +54,10 @@ func random_map() -> Array:
 		result.append(array)
 	return result
 
-func fulfills(map, requirements, x,y):
+func fulfills(map, requirements, x,y) -> bool:
+	if len(map) != SIZE.x or (len(map) > 0 and len(map[0]) != SIZE.y):
+		print("ERROR in game_of_life.gd: map size (", len(map),", ",len(map[0]), ") and game size (", SIZE, ") do not agree")
+		return false
 	# not sum requirements
 	var all_sums = 0
 	for i in len(SPECIES):
@@ -100,6 +110,26 @@ func get_next_step(map) -> Array:
 
 func set_size(new_size) -> void:
 	SIZE = new_size
+
+func add_species(new) -> void:
+	# add species in each requirement
+	for species in SPECIES:
+		species.survival[new.my_name] = FULL_ARRAY
+		species.reproduction[new.my_name] = FULL_ARRAY
+		new.survival[species.my_name] = FULL_ARRAY
+		new.reproduction[species.my_name] = FULL_ARRAY
+	# add new species
+	SPECIES.append(new)
+
+func remove_species(index) -> void:
+	# save name
+	var its_name = SPECIES[index].my_name
+	# remove species
+	SPECIES.remove_at(index)
+	# remove species requirement in each remaining species
+	for species in SPECIES:
+		species.survival.erase(its_name)
+		species.reproduction.erase(its_name)
 
 # help functions
 
