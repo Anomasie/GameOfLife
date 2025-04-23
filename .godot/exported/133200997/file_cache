@@ -1,0 +1,11 @@
+res://assets/MainTheme.tres::c55808f52e121058d078a987b0103fa9::1745404639::res://.godot/exported/133200997/export-e9f27774c62e1192d99cb4fea73f4fda-MainTheme.res
+res://nodes/buttons/MyTextureButton.tscn::1181fe46a5d9b4b099c59f4ae40e9bdb::1744873856::res://.godot/exported/133200997/export-8b4c40d3479d5ed63beec4aa56a994ab-MyTextureButton.scn
+res://nodes/buttons/SpeciesButton.tscn::315da32a8d019b19a85834e1e14eb72a::1745408860::res://.godot/exported/133200997/export-33cb0f57e38c7bd4bc6d710170883932-SpeciesButton.scn
+res://nodes/buttons/SwitchButton.tscn::6f2b4b6c93613db0cbb19360a6bbc6b5::1745408860::res://.godot/exported/133200997/export-bb47b78058e4d46cce468cd5770d5638-SwitchButton.scn
+res://nodes/color-options/ColorSliders.tscn::73c60516e0b1d290f0d2dd24b893c1b2::1745179818::res://.godot/exported/133200997/export-7e077ab3da68a905c85555e14d5bbc91-ColorSliders.scn
+res://nodes/GAME.tscn::6f4c7b9a2b9be47a37e92fbec6d65097::1745408860::res://.godot/exported/133200997/export-284fa2b27d26723ebf88fc583298224b-GAME.scn
+res://nodes/GameField.tscn::fdc3c755a69fb5da7dbb2cf92ade2a79::1745408860::res://.godot/exported/133200997/export-a4f4a8b1208c312b827f860b2e6328c3-GameField.scn
+res://nodes/Ledge.tscn::d9f25fc0ddd3fc7ba403bd43981e0cf6::1745408860::res://.godot/exported/133200997/export-a78f8156a0dcb274750700efa864e525-Ledge.scn
+res://nodes/Map.tscn::06b9f3f9cade177fae0f2001e544f63d::1745408860::res://.godot/exported/133200997/export-2cd3cedad5cef8afa398db972673933a-Map.scn
+res://nodes/Rules.tscn::28c261534439647a8068aa24da9f6837::1745408912::res://.godot/exported/133200997/export-c213ee2232ea73f83a60c3c83ca0cdb7-Rules.scn
+res://nodes/Species.tscn::e2c25dd4479efe57a897a28289da4798::1745408860::res://.godot/exported/133200997/export-1a37118204c585a6d8b7b7715a116a57-Species.scn

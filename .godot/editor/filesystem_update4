@@ -1,0 +1,16 @@
+res://nodes/Rules.tscn
+res://assets/MainTheme.tres
+res://shader/GameOfLife.gdshader
+res://nodes/Rules.gd
+res://nodes/Species.tscn
+res://script/game_of_life.gd
+res://nodes/GAME.tscn
+res://nodes/GameField.tscn
+res://nodes/buttons/SwitchButton.tscn
+res://nodes/Ledge.tscn
+res://nodes/Map.tscn
+res://nodes/buttons/SpeciesButton.tscn
+res://nodes/Species.gd
+res://nodes/GameField.gd
+res://nodes/GAME.gd
+res://script/species.gd
